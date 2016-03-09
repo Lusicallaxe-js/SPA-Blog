@@ -2,7 +2,7 @@ var app = app || {};
 
 app.CollectionRequester = (function () {
     function CollectionRequester(collectionName) {
-        this.serviceUrl = app.requester.baseUrl + 'appdata/' + app.requester.appId + '/' + collectionName;
+        this.serviceUrl = app.Requester.baseUrl + 'appdata/' + app.Requester.appId + '/' + collectionName;
     }
 
 
@@ -10,7 +10,7 @@ app.CollectionRequester = (function () {
         var data = {
             name: itemName
         };
-        app.requester.makeRequest('POST', this.serviceUrl, data, true).then(function (success) {
+        app.Requester.makeRequest('POST', this.serviceUrl, data, true).then(function (success) {
             sessionStorage[itemName] = success._id;
         }, function (error) {
             console.error(error);
@@ -19,7 +19,7 @@ app.CollectionRequester = (function () {
 
     CollectionRequester.prototype.delete = function (itemName) {
         var url = this.serviceUrl + '/' + sessionStorage[itemName];
-        app.requester.makeRequest('DELETE', url, {}, true);
+        app.Requester.makeRequest('DELETE', url, {}, true);
     };
 
     return CollectionRequester;

@@ -3,7 +3,7 @@ var app = app || {};
 app.UserRequester = (function () {
     // TODO: var requestUrl
     function UserRequester() {
-        this.serviceUrl = app.requester.baseUrl + 'user/' + app.requester.appId;
+        this.serviceUrl = app.Requester.baseUrl + 'user/' + app.Requester.appId;
     }
 
     UserRequester.prototype.signUp = function (username, password, email) {
@@ -13,7 +13,7 @@ app.UserRequester = (function () {
                 password: password,
                 email: email
             };
-        app.requester.makeRequest('POST', requestUrl, data).then(function (success) {
+        app.Requester.makeRequest('POST', requestUrl, data).then(function (success) {
             sessionStorage['sessionAuth'] = success._kmd.authtoken;
             sessionStorage['userId'] = success._id;
         }, function (error) {
@@ -28,7 +28,7 @@ app.UserRequester = (function () {
                 password: password
             };
 
-        app.requester.makeRequest('POST', requestUrl, data).then(function (success) {
+        app.Requester.makeRequest('POST', requestUrl, data).then(function (success) {
             sessionStorage['sessionAuth'] = success._kmd.authtoken;
             sessionStorage['userId'] = success._id;
         }, function (error) {
@@ -38,7 +38,7 @@ app.UserRequester = (function () {
 
     UserRequester.prototype.logout = function () {
         var requestUrl = this.serviceUrl + '/_logout';
-        app.requester.makeRequest('POST', requestUrl, {}, true).then(function (success) {
+        app.Requester.makeRequest('POST', requestUrl, {}, true).then(function (success) {
             console.log('Logout successfully');
             console.log(success);
         }, function (error) {
@@ -49,7 +49,7 @@ app.UserRequester = (function () {
     UserRequester.prototype.getInfo = function () {
         var requestUrl = this.serviceUrl + '/_me';
 
-        app.requester.makeRequest('GET', requestUrl, null, true).then(function (success) {
+        app.Requester.makeRequest('GET', requestUrl, null, true).then(function (success) {
             console.log(success);
         }, function (error) {
             console.error(error);

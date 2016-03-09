@@ -17,7 +17,7 @@ app.registerView = (function () {
 
     return {
         load: function (selector) {
-            return new RegisterView(selector);
+            return RegisterView(selector);
         }
     }
 }());

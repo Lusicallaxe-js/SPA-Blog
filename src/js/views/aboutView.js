@@ -14,7 +14,7 @@ app.aboutView = (function () {
 
     return {
         load: function (selector) {
-            return new AboutView(selector);
+            return AboutView(selector);
         }
     }
 }());

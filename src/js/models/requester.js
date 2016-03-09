@@ -1,10 +1,10 @@
 var app = app || {};
 
-app.requester = (function () {
+app.Requester = (function () {
     function Requester(appId, appSecret) {
         this.appId = appId;
         this.appSecret = appSecret;
-        this.baseUrl = 'http://baas.kinvey.com/';
+        this.baseUrl = 'https://baas.kinvey.com/';
     }
 
     Requester.prototype.makeRequest = function (method, url, dataObj, useSession) {
@@ -12,7 +12,7 @@ app.requester = (function () {
             defer = Q.defer(),
             options = {
                 method: method,
-                url: url,
+                url: this.baseUrl + url,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -43,9 +43,5 @@ app.requester = (function () {
         return defer.promise;
     };
 
-    return {
-        config: function (appId, appSecret) {
-            app.requester = new Requester(appId, appSecret);
-        }
-    };
+    return Requester;
 }());

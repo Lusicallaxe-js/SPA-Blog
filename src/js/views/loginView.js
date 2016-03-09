@@ -17,7 +17,7 @@ app.loginView = (function () {
 
     return {
         load: function (selector) {
-            return new LoginView(selector);
+            return LoginView(selector);
         }
     }
 }());
