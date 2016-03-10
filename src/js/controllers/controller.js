@@ -29,7 +29,7 @@ app.controller = (function () {
             this.redirect('#/create-article');
         });
         this.bind('post-article-event', function (e, data) {
-            _this.model.articleModel.addArticle('articles',data);
+            _this.model.articleModel.addArticle('articles', data);
 
         });
     });

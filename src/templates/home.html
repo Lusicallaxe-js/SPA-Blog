@@ -1,0 +1,18 @@
+<section id="posts">
+    <button id="create-article-btn">Create new article</button>
+    {{#articles}}
+    <article id="">
+        <h2><a style="color: {{titleColor}}" href="#">{{title}}</a></h2>
+        {{#imageBase64}}
+        <div>
+            <img class="header-image" src="data:image/png;base64,{{imageBase64}}" alt="headerImage">
+        </div>
+        {{/imageBase64}}
+        <p class="post-content">{{content}}</p>
+        <p class="post-details-container">
+            <span title="tags">{{tags}}</span>
+        </p>
+        <hr/>
+    </article>
+    {{/articles}}
+</section>

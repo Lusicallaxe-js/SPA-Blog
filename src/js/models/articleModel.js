@@ -17,7 +17,10 @@ app._articleModel = (function () {
 
         this._requester.makeRequest('GET', this.collectionUrl + query, null, true)
             .then(function (data) {
-                defer.resolve(data);
+                var articlesData = {
+                    articles: data
+                };
+                defer.resolve(articlesData);
             }, function (error) {
                 defer.reject(error);
             });
