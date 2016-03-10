@@ -3,27 +3,17 @@ sessionStorage['sessionAuth'] = '0f0744cb-2c1c-49b8-bb1a-54ec662e993f.dEPvh5nJir
 (function () {
     var requester = new app.Requester('kid_-ke8mBy-kZ', '1f03be196d7447e3a2a94b483c32061c');
     var models = app.model.loadModels(requester);
+    var controller = app.controller.load(models);
+
     app.router = Sammy(function () {
         var selector = '#wrapper';
 
         this.get('#/', function () {
-            models.article.getArticles('appdata/kid_-ke8mBy-kZ/items/')
-                .then(function (articlesData) {
-                        app.homeView.load(selector, articlesData);
-                        $('#create-article-btn').click(function () {
-                            var articleName = $('#article-name-input').val();
-                            if (articleName) {
-                                var data = {
-                                    name: articleName
-                                };
-                                requester.makeRequest('POST', 'appdata/kid_-ke8mBy-kZ/items/', data, true)
-                            }
-                        });
-                    },
-                    function (error) {
-                        console.log(error);
-                    })
+            controller.getHomePage(selector);
+        });
 
+        this.get('#/create-article', function () {
+            controller.getCreateArticlePage(selector);
         });
 
         this.get('#/login', function () {

@@ -2,7 +2,7 @@ var app = app || {};
 
 app.model = function () {
     function Model(requester) {
-        this.article = app._articleModel.load(requester);
+        this.articleModel = app._articleModel.load(requester);
     }
 
     return {
