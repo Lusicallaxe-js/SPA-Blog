@@ -21,6 +21,7 @@ app.createArticleView = (function () {
                         title: $('#title').val(),
                         titleColor: $('#color').val(),
                         image: pictureFile,
+                        imageSrc: $('#picture-src').val(),
                         content: $('#content').val(),
                         tags: $('#tags').val()
                     };

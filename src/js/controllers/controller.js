@@ -29,10 +29,23 @@ app.controller = (function () {
             this.redirect('#/create-article');
         });
         this.bind('post-article-event', function (e, data) {
-            _this.model.articleModel.addArticle('articles', data);
-
+            validateArticle(data);
+            var SammyObj = this;
+            _this.model.articleModel.addArticle('articles', data)
+                .then(function (success) {
+                    console.log(success);
+                    SammyObj.redirect('#/');
+                }, function (error) {
+                    console.error(error);
+                })
         });
     });
+
+    function validateArticle(article) {
+        if (!article.title || !article.content) {
+            throw new Error('Invalid title and content')
+        }
+    }
 
     return {
         load: function (model) {

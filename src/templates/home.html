@@ -8,6 +8,11 @@
             <img class="header-image" src="data:image/png;base64,{{imageBase64}}" alt="headerImage">
         </div>
         {{/imageBase64}}
+        {{#imageSrc}}
+        <div>
+            <img class="header-image" src="{{imageSrc}}" alt="headerImage">
+        </div>
+        {{/imageSrc}}
         <p class="post-content">{{content}}</p>
         <p class="post-details-container">
             <span title="tags">{{tags}}</span>

@@ -1,19 +1,30 @@
 var app = app || {};
 app.article = (function () {
 
-    function articleCreate(title, titleColor, image, content, tags) {
+    function articleCreate(title, titleColor, image, imageSrc, content, tags) {
         var def = Q.defer();
         var _this = {};
-        base64(image).then(function (success) {
-            _this.imageBase64 = success.base64;
-            _this.title = title;
-            _this.titleColor = titleColor;
-            _this.tags = tags;
-            _this.content = content;
+        _this.title = title;
+        _this.titleColor = titleColor;
+        _this.tags = tags;
+        _this.content = content;
+        if (!imageSrc) {
+            base64(image).then(function (success) {
+                _this.imageBase64 = success.base64;
+                //_this.title = title;
+                //_this.titleColor = titleColor;
+                //_this.tags = tags;
+                //_this.content = content;
+                def.resolve(_this);
+            }, function (e) {
+                def.reject(e);
+                console.error(e);
+            }).done();
+        } else {
+            _this.imageSrc = imageSrc;
             def.resolve(_this);
-        }, function (e) {
-            console.error(e);
-        });
+        }
+
         return def.promise;
     }
 
