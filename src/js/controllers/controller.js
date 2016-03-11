@@ -23,8 +23,8 @@ app.controller = (function () {
                     console.log(success);
                     app.createArticleView.load(selector);
                 }, function (error) {
-                    window.location.replace('#/');
                     console.log('You do not have Administrator access!');
+                    window.location.replace('#/');
                 })
         } else {
             console.log('Yoy must login first!');
@@ -46,6 +46,7 @@ app.controller = (function () {
                 .then(function (s) {
                     SammyObj.redirect('#/');
                 }, function (e) {
+                    poppy.pop('error', 'Wrong username or password!','');
                     console.log(e);
                 })
         });
