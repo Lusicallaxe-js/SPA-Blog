@@ -1,5 +1,6 @@
 var app = app || {};
 sessionStorage['sessionAuth'] = '0f0744cb-2c1c-49b8-bb1a-54ec662e993f.dEPvh5nJircwZ0+bOfJGltXYaRlRHWLw821nCqzYj5E=';
+//sessionStorage['id'] = '56e28b1d27b937ca6f0824b4';
 (function () {
     var requester = new app.Requester('kid_-ke8mBy-kZ', '1f03be196d7447e3a2a94b483c32061c');
     var models = app.model.loadModels(requester);
@@ -17,7 +18,7 @@ sessionStorage['sessionAuth'] = '0f0744cb-2c1c-49b8-bb1a-54ec662e993f.dEPvh5nJir
         });
 
         this.get('#/login', function () {
-            app.loginView.load(selector);
+            controller.getLoginPage(selector);
         });
 
         this.get('#/register', function () {

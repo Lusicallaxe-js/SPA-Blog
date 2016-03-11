@@ -18,11 +18,9 @@ app.Requester = (function () {
                 },
                 data: JSON.stringify(dataObj),
                 success: function (data) {
-                    $('<p>').text(JSON.stringify(data)).appendTo($('#respond')); //TODO: remove (Test purposes)
                     defer.resolve(data);
                 },
                 error: function (error) {
-                    $('<p>').css('color', 'red').text(JSON.stringify(error.responseText)).appendTo($('#respond'));
                     defer.reject(error);
                 }
             };

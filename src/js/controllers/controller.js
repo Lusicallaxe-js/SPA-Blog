@@ -17,23 +17,37 @@ app.controller = (function () {
     };
 
     Controller.prototype.getCreateArticlePage = function (selector) {
-        app.createArticleView.load(selector);
+        if (sessionStorage['id']) {
+            _this.model.userModel.isAdmin(sessionStorage['id'])
+                .then(function (success) {
+                    console.log(success);
+                    app.createArticleView.load(selector);
+                }, function (error) {
+                    window.location.replace('#/');
+                    console.log('You do not have Administrator access!');
+                })
+        } else {
+            console.log('Yoy must login first!');
+            window.location.replace('#/');
+        }
+
     };
 
-    Controller.prototype.createArticle = function (article) {
-        app.createArticleView.load(selector);
+    Controller.prototype.getLoginPage = function (selector) {
+        app.loginView.load(selector);
     };
 
     Sammy(function () {
+        var SammyObj;                           //TODO:  window.location.replace('#/');
+
         this.bind('add-article-event', function (e, data) {
             this.redirect('#/create-article');
         });
+
         this.bind('post-article-event', function (e, data) {
             validateArticle(data);
-            var SammyObj = this;
             _this.model.articleModel.addArticle('articles', data)
                 .then(function (success) {
-                    console.log(success);
                     SammyObj.redirect('#/');
                 }, function (error) {
                     console.error(error);
