@@ -8,22 +8,39 @@ app.article = (function () {
         _this.titleColor = titleColor;
         _this.tags = tags;
         _this.content = content;
-        if (!imageSrc) {
-            base64(image).then(function (success) {
-                _this.imageBase64 = success.base64;
-                //_this.title = title;
-                //_this.titleColor = titleColor;
-                //_this.tags = tags;
-                //_this.content = content;
-                def.resolve(_this);
-            }, function (e) {
-                def.reject(e);
-                console.error(e);
-            }).done();
+        if (!imageSrc && !image) {
+            def.resolve(_this);
         } else {
-            _this.imageSrc = imageSrc;
+            if (imageSrc) {
+                _this.imageSrc = imageSrc;
+            } else {
+                base64(image).then(function (success) {
+                    _this.imageBase64 = success.base64;
+                }, function (e) {
+                    def.reject(e);
+                    console.error(e);
+                }).done();
+            }
             def.resolve(_this);
         }
+        //if (!imageSrc) {
+        //    base64(image).then(function (success) {
+        //        _this.imageBase64 = success.base64;
+        //        //_this.title = title;
+        //        //_this.titleColor = titleColor;
+        //        //_this.tags = tags;
+        //        //_this.content = content;
+        //        def.resolve(_this);
+        //    }, function (e) {
+        //        def.reject(e);
+        //        console.error(e);
+        //    }).done();
+        //} else {
+        //    if (imageSrc) {
+        //
+        //    }
+        //    def.resolve(_this);
+        //}
 
         return def.promise;
     }
