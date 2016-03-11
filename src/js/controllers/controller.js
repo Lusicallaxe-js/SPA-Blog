@@ -42,13 +42,15 @@ app.controller = (function () {
 
         this.bind('login-event', function (e, data) {
             SammyObj = this;
-            _this.model.userModel.login(data)
-                .then(function (s) {
-                    SammyObj.redirect('#/');
-                }, function (e) {
-                    poppy.pop('error', 'Wrong username or password!','');
-                    console.log(e);
-                })
+            if (validateUser(data)) {
+                _this.model.userModel.login(data)
+                    .then(function (s) {
+                        SammyObj.redirect('#/');
+                    }, function (e) {
+                        poppy.pop('error', 'Wrong username or password!', '');
+                        console.log(e);
+                    })
+            }
         });
 
         this.bind('add-article-event', function (e, data) {
@@ -71,6 +73,18 @@ app.controller = (function () {
         if (!article.title || !article.content) {
             throw new Error('Invalid title and content')
         }
+    }
+
+    function validateUser(data) {
+        if (!data.username || data.username.length < 4) {
+            poppy.pop('error', 'Invalid username', '');
+            return false;
+        }
+        if (!data.password || data.password.length < 4) {
+            poppy.pop('error', 'Invalid password', '');
+            return false;
+        }
+        return true;
     }
 
     return {

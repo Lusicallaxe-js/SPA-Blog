@@ -155,7 +155,7 @@ var poppy = (function () {
             document.getElementById('wrapper').appendChild(el);
             setTimeout(function () {
                 el.style.opacity = 1;
-            }, 500);
+            }, 300);
         }
 
         function fadeOut(domView) {
