@@ -4,12 +4,20 @@ app.loginView = (function () {
     function LoginView(selector) {
         $(selector).empty();
 
-        $(selector).append(
-            $('<h1>').text('Login'),
-            $('<h3>').text('TODO: create templates'),
-            $('<p>').text('Login page!'),
-            $('<input>')
-        );
+        $.get('templates/login.html', function (template) {
+            var output = Mustache.render(template);
+            $(selector).append(output);
+
+            $('#login-btn').click(function () {
+                var data = {
+                    username: $('#login-username').val(),
+                    password: $('#login-password').val()
+                };
+                Sammy(function () {
+                    this.trigger('login-event', data);
+                });
+            });
+        });
 
 
         $(selector).css('width', '200px');
