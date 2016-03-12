@@ -30,7 +30,7 @@ app._articleModel = (function () {
 
     Article.prototype.addArticle = function (urlCollection, article) {
         var defer = Q.defer();
-        app.article.get(article.title, article.titleColor, article.image, article.imageSrc, article.content, article.tags)
+        app.article.get(article)
             .then(function (articleData) {
                 _this._requester.makeRequest('POST', _this.collectionUrl + urlCollection, articleData, true)
                     .then(function (data) {

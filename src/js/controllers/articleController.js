@@ -1,6 +1,6 @@
 var app = app || {};
 
-app.articleController = (function () {
+app.articleController = function () {
     var _this;
 
     function ArticleController(model) {
@@ -49,20 +49,23 @@ app.articleController = (function () {
 
         this.bind('post-article-event', function (e, data) {
             SammyObj = this;
-            validateArticle(data);
-            _this.model.addArticle('articles', data)
-                .then(function (success) {
-                    SammyObj.redirect('#/');
-                }, function (error) {
-                    console.error(error);
-                })
+            if (data.title && data.content) {
+                _this.model.addArticle('articles', data)
+                    .then(function (success) {
+                        SammyObj.redirect('#/');
+                    }, function (error) {
+                        console.error(error);
+                    })
+            } else {
+                poppy.pop('warning', 'Invalid title or content', '')
+            }
         });
     });
 
-    function validateArticle(article) {
-        if (!article.title || !article.content) {
-            throw new Error('Invalid title and content')
-        }
+    function bindArticle(article) {
+        article.contentSummery = article.content.length > 100 ? article.content.slice(0, 100) : article.content;
+        article.tags = article.tags.split(/[\s+|,]+/);
+        article.rating = 0;
     }
 
     return {
@@ -70,4 +73,4 @@ app.articleController = (function () {
             return new ArticleController(model);
         }
     }
-}());
+}();

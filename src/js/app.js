@@ -8,6 +8,25 @@ sessionStorage['sessionAuth'] = '0f0744cb-2c1c-49b8-bb1a-54ec662e993f.dEPvh5nJir
     var articleController = app.articleController.load(models.articleModel);
     var commentController = app.commentController.load(models.commentModel);
 
+    $('#search-btn').click(function (e) {
+        var tagsToSearch = $('#search')
+            .val()
+            .trim()
+            .toLowerCase()
+            .split(/\s+/);
+
+        if (tagsToSearch.length) {
+            var query = '?query={"tags":{"$in":' + JSON.stringify(tagsToSearch) + '}}';
+            var url = 'articles' + query;
+            models.articleModel.getArticles(url)
+                .then(function (success) {
+                    app.homeView.load('#wrapper', success);
+                }, function (e) {
+                    console.log(e);
+                }).done();
+        }
+    });
+
     app.router = Sammy(function () {
         var selector = '#wrapper';
 
