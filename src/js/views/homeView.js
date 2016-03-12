@@ -19,7 +19,7 @@ app.homeView = (function () {
                         "$element": element,
                         "articleId": id,
                         "content": content,
-                        "username": name,
+                        "author": name,
                         "email": email
                     });
                 });

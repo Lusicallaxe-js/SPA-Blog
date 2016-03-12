@@ -2,7 +2,7 @@ var app = app || {};
 
 app.commentView = (function () {
     function commentView(selector, commentData) {
-        selector.empty();
+        selector.find('*').not('button').remove();
 
         $.get('templates/comment.html', function (template) {
             var output = Mustache.render(template, commentData);

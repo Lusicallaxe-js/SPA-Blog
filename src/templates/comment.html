@@ -1,6 +1,9 @@
 {{#comments}}
-<div data-id="{{id}}"></div>
-<p>{{content}}</p>
-<p>{{author}}</p>
-<p>{{email}}</p>
+<div data-id="{{_id}}">
+    <p><strong>comment: </strong>{{content}}</p>
+    <p><strong>user: </strong>{{author}}</p>
+    {{#email}}
+    <p><strong>email: </strong>{{email}}</p>
+    {{/email}}
+</div>
 {{/comments}}
