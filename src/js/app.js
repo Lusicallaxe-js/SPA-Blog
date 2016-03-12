@@ -4,21 +4,28 @@ sessionStorage['sessionAuth'] = '0f0744cb-2c1c-49b8-bb1a-54ec662e993f.dEPvh5nJir
 (function () {
     var requester = new app.Requester('kid_-ke8mBy-kZ', '1f03be196d7447e3a2a94b483c32061c');
     var models = app.model.loadModels(requester);
-    var controller = app.controller.load(models);
+    var userController = app.userController.load(models.userModel);
+    var articleController = app.articleController.load(models.articleModel);
+    var commentController = app.commentController.load(models.commentModel);
 
     app.router = Sammy(function () {
         var selector = '#wrapper';
 
         this.get('#/', function () {
-            controller.getHomePage(selector);
+            userController.isAdmin()
+                .then(function (success) {
+                    articleController.getAdminPage(selector, true);
+                }, function (error) {
+                    articleController.getArticlePage(selector, false);
+                })
         });
 
         this.get('#/create-article', function () {
-            controller.getCreateArticlePage(selector);
+            articleController.getCreateArticlePage(selector);
         });
 
         this.get('#/login', function () {
-            controller.getLoginPage(selector);
+            userController.getLoginPage(selector);
         });
 
         this.get('#/register', function () {

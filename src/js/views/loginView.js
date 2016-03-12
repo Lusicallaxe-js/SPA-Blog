@@ -1,7 +1,7 @@
 var app = app || {};
 
 app.loginView = (function () {
-    function LoginView(selector) {
+    function loginView(selector) {
         $(selector).empty();
 
         $.get('templates/login.html', function (template) {
@@ -25,7 +25,7 @@ app.loginView = (function () {
 
     return {
         load: function (selector) {
-            return LoginView(selector);
+            return loginView(selector);
         }
     }
 }());

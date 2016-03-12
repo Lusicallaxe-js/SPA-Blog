@@ -3,7 +3,7 @@ var app = app || {};
 app.createArticleView = (function () {
     var pictureFile;
 
-    function CreateArticleView(selector) {
+    function createArticleView(selector) {
         $(selector).empty();
 
         $.get('templates/create-article.html', function (template) {
@@ -33,7 +33,7 @@ app.createArticleView = (function () {
 
     return {
         load: function (selector) {
-            new CreateArticleView(selector);
+            return createArticleView(selector);
         }
     }
 }());

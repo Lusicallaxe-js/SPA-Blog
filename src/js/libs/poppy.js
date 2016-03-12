@@ -101,7 +101,7 @@ var poppy = (function () {
 
             ErrorPop = (function () {
                 function ErrorPop(title, message) {
-                    Popup.call(this, title, message, 'error', 'topRight', false, 1000, false, false);
+                    Popup.call(this, title, message, 'error', 'topRight', false, 1000, true, false);
                     this.popupData.fadeOutOnClick = true;
                 }
 
@@ -126,7 +126,7 @@ var poppy = (function () {
         };
     }());
 
-    var poppy = (function () {
+    return (function () {
         function pop(type, title, message, callback) {
             "use strict";
             var popup, view;
@@ -165,12 +165,14 @@ var poppy = (function () {
             }, 500);
 
             setTimeout(function () {
-                document.getElementById('wrapper').removeChild(domView);
+                $('.poppy-container').remove();
             }, 800);
         }
 
         function processPopup(domView, popup) {
             "use strict";
+
+            $('.poppy-' + popup.popupData.type).remove();
 
             fadeIn(domView);
             if (popup.popupData.closeButton) {
@@ -198,6 +200,4 @@ var poppy = (function () {
             pop: pop
         };
     }());
-
-    return poppy;
 }());

@@ -1,0 +1,45 @@
+<section id="posts">
+    <button id="create-article-btn">Create new article</button>
+    {{#articles}}
+    <article id="">
+        <h2>
+            <a style="color: {{titleColor}}" href="#">{{title}}</a>
+            <span class="title-buttons">
+                <button id="edit-title">edit</button>
+            </span>
+        </h2>
+        {{#imageBase64}}
+        <div>
+            <img class="header-image" src="data:image/png;base64,{{imageBase64}}" alt="headerImage">
+        </div>
+        {{/imageBase64}}
+        {{#imageSrc}}
+        <div>
+            <img class="header-image" src="{{imageSrc}}" alt="headerImage">
+        </div>
+        {{/imageSrc}}
+        <p class="post-content">
+            {{content}}
+            <span class="content-buttons">
+                <button id="edit-content">edit</button>
+            </span>
+        </p>
+        <div class="comments">
+            <button class="add-comment">Add comment</button>
+            {{#comments}}
+            <p>{{comment.content}}</p>
+            <p>{{comment.author}}</p>
+            <span class="title-buttons">
+                <button id="edit-comment">edit</button>
+                <button id="delete-comment">x</button>
+            </span>
+            {{/comments}}
+
+        </div>
+        <p class="post-details-container">
+            <span title="tags">{{tags}}</span>
+        </p>
+        <hr/>
+    </article>
+    {{/articles}}
+</section>

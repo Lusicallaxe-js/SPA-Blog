@@ -1,7 +1,6 @@
 <section id="posts">
-    <button id="create-article-btn">Create new article</button>
     {{#articles}}
-    <article id="">
+    <article data-id="{{_id}}">
         <h2><a style="color: {{titleColor}}" href="#">{{title}}</a></h2>
         {{#imageBase64}}
         <div>
@@ -14,8 +13,13 @@
         </div>
         {{/imageSrc}}
         <p class="post-content">{{content}}</p>
+        <h3>Comments</h3>
+        <div class="comments">
+            <button class="add-comment">Add comment</button>
+            <button class="view-comments">View comments</button>
+        </div>
         <p class="post-details-container">
-            <span title="tags">{{tags}}</span>
+            <!--<span title="tags">{{tags}}</span>-->
         </p>
         <hr/>
     </article>

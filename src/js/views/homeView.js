@@ -1,45 +1,45 @@
 var app = app || {};
 
 app.homeView = (function () {
-    function HomeView(selector, articlesData) {
+    function homeView(selector, articlesData) {
         $(selector).empty();
 
         $.get('templates/home.html', function (template) {
-            var output = Mustache.render(template,articlesData);
+            var output = Mustache.render(template, articlesData);
             $(selector).append(output);
 
-            $('#create-article-btn').click(function () {
+            $('.add-comment').click(function () {
+                var id = $(this).closest('article').attr('data-id');
+                var element = $(this).closest('.comments');
+                var content = prompt('Content');
+                var name = prompt('name?');
+                var email = prompt('email?');
                 Sammy(function () {
-                    this.trigger('add-article-event');
+                    this.trigger('add-comment-event', {
+                        "$element": element,
+                        "articleId": id,
+                        "content": content,
+                        "username": name,
+                        "email": email
+                    });
+                });
+            });
+
+            $('.view-comments').click(function () {
+                var id = $(this).closest('article').attr('data-id'),
+                    element = $(this).closest('.comments');
+                Sammy(function () {
+                    this.trigger('view-comments-event', {"id": id, "$element": $(element)});
                 });
             });
         });
-        //var fragment = $(document.createDocumentFragment());
-        //articlesData.forEach(function (art) {
-        //    fragment.append($('<article>').text(art.title))
-        //});
-        //var articles = $('<main>')
-        //    .attr('id', 'article-main')
-        //    .css({'border': '1px solid'})
-        //    .append($('<h2>').text('Articles: '))
-        //    .append(fragment);
-        //
-        //$(selector).append(
-        //    $('<h1>').text('Home'),
-        //    $('<h3>').text('TODO: create templates'),
-        //    $('<p>').text('home page!'),
-        //    $('<button>').text('Create new article').attr('id', 'create-article-btn'),
-        //    articles
-        //);
-
-
 
         $(selector).css('width', '100%');
     }
 
     return {
         load: function (selector, data) {
-            return HomeView(selector, data);
+            return homeView(selector, data);
         }
     }
 }());

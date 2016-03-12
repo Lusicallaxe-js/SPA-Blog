@@ -13,7 +13,7 @@ app._userModel = (function () {
             .then(function (success) {
                 sessionStorage['sessionAuth'] = success._kmd.authtoken;
                 sessionStorage['id'] = success._id;
-                defer.resolve();
+                defer.resolve(success);
             }, function (error) {
                 defer.reject(error)
             });
@@ -21,19 +21,19 @@ app._userModel = (function () {
     };
 
     User.prototype.isAdmin = function (id) {
-        var defer = Q.defer();
+        //var defer = Q.defer();
         var data = {
             id: id
         };
         var url = 'rpc/' + this._requester.appId + '/custom/isAdmin';
-        this._requester.makeRequest('POST', url, data, true)
-            .then(function (role) {
-                defer.resolve(role);
-            }, function (error) {
-                defer.reject(error);
-            });
-
-        return defer.promise;
+        return this._requester.makeRequest('POST', url, data, true);
+        //.then(function (role) {
+        //    defer.resolve(role);
+        //}, function (error) {
+        //    defer.reject(error);
+        //});
+        //
+        //return defer.promise;
     };
 
     return {
