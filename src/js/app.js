@@ -7,25 +7,27 @@ sessionStorage['sessionAuth'] = '0f0744cb-2c1c-49b8-bb1a-54ec662e993f.dEPvh5nJir
     var userController = app.userController.load(models.userModel);
     var articleController = app.articleController.load(models.articleModel);
     var commentController = app.commentController.load(models.commentModel);
+    var menuController = app.menuController.load(models.articleModel);
 
-    $('#search-btn').click(function (e) {
-        var tagsToSearch = $('#search')
-            .val()
-            .trim()
-            .toLowerCase()
-            .split(/\s+/);
-
-        if (tagsToSearch.length) {
-            var query = '?query={"tags":{"$in":' + JSON.stringify(tagsToSearch) + '}}';
-            var url = 'articles' + query;
-            models.articleModel.getArticles(url)
-                .then(function (success) {
-                    app.homeView.load('#articles', success);
-                }, function (error) {
-                    console.log(error);
-                }).done();
-        }
-    });
+    //$('#search-btn').click(function (e) {
+    //    var tagsToSearch = $('#search')
+    //        .val()
+    //        .trim()
+    //        .toLowerCase()
+    //        .split(/\s+/);
+    //
+    //    if (tagsToSearch.length) {
+    //        var query = '?query={"tags":{"$in":' + JSON.stringify(tagsToSearch) + '}}';
+    //        var url = 'articles' + query;
+    //        models.articleModel.getArticles(url)
+    //            .then(function (success) {
+    //                app.homeView.load('#articles', success);
+    //            }, function (error) {
+    //                console.log(error);
+    //            }).done();
+    //    }
+    //});
+    menuController.loadSearch('#search-btn');
 
     app.router = Sammy(function () {
         var selector = '#articles';
