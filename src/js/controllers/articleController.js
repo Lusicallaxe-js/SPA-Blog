@@ -23,9 +23,11 @@ app.articleController = function () {
     ArticleController.prototype.getArticleByIdPage = function (id, selector) {
         this.model.getArticles('articles/' + id)
             .then(function (data) {
-                data.tags = {
-                    tagsObj: data.tags
-                };
+                var dataO = [];
+                data.tags.forEach(function (tag) {
+                    dataO.push({tag: tag});
+                });
+                data.tags = dataO;
                 var articlesData = {
                     articles: data
                 };
