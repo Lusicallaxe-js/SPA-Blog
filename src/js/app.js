@@ -20,15 +20,15 @@ sessionStorage['sessionAuth'] = '0f0744cb-2c1c-49b8-bb1a-54ec662e993f.dEPvh5nJir
             var url = 'articles' + query;
             models.articleModel.getArticles(url)
                 .then(function (success) {
-                    app.homeView.load('#wrapper', success);
-                }, function (e) {
-                    console.log(e);
+                    app.homeView.load('#articles', success);
+                }, function (error) {
+                    console.log(error);
                 }).done();
         }
     });
 
     app.router = Sammy(function () {
-        var selector = '#wrapper';
+        var selector = '#articles';
 
         this.get('#/', function () {
             userController.isAdmin()

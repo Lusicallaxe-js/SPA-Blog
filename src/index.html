@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Lusicallaxe</title>
     <link rel="stylesheet" href="styles/poppy-styles.css">
+    <link rel="stylesheet" href="styles/main.css">
     <script src="js/libs/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/sammy/0.7.4/sammy.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/q.js/0.9.2/q.js"></script>
@@ -11,19 +12,35 @@
     <script src="js/libs/poppy.js"></script>
 </head>
 <body>
-<header>
-    <nav>
-        <ul>
-            <li><a href="#/">Home</a></li>
-            <li><a href="#/about">About</a></li>
-            <li><a href="#/login">Login</a></li>
-            <li><a href="#/register">Register</a></li>
-        </ul>
-        <button id="search-btn">Search</button>
-        <input type="search" id="search" title="search">
-    </nav>
-</header>
 <div id="wrapper">
+    <header>
+        <div id="logoarea">
+            <a href="#">
+                <img src="../images/Lusicallaxe%20(2).png" alt="Planets Logo"/>
+            </a>
+        </div>
+        <div id="header-area-right">
+            <nav id="menu">
+                <ul id="nav-menu">
+                    <li id="nav-photos" class="active">
+                        <a href="#/">Home</a>
+                    </li>
+                    <li id="nav-albums">
+                        <a href="#">Articles</a>
+                    </li>
+                    <li id="nav-authors">
+                        <a href="#/login">Login</a>
+                    </li>
+                </ul>
+            </nav>
+            <div id="search-form">
+                <form>
+                    <input type="text" placeholder="Search..." id="search" required="required" maxlength="150">
+                    <button type="button" id="search-btn"></button>
+                </form>
+            </div>
+        </div>
+    </header>
     <section id="articles"></section>
 </div>
 <script src="js/models/article.js"></script>

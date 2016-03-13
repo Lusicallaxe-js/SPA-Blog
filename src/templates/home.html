@@ -1,27 +1,25 @@
-<section id="posts">
-    {{#articles}}
-    <article data-id="{{_id}}">
-        <h2><a style="color: {{titleColor}}" href="#">{{title}}</a></h2>
-        {{#imageBase64}}
-        <div>
-            <img class="header-image" src="data:image/png;base64,{{imageBase64}}" alt="headerImage">
-        </div>
-        {{/imageBase64}}
-        {{#imageSrc}}
-        <div>
-            <img class="header-image" src="{{imageSrc}}" alt="headerImage">
-        </div>
-        {{/imageSrc}}
-        <p class="post-content">{{content}}</p>
-        <h3>Comments</h3>
-        <div class="comments">
-            <button class="add-comment">Add comment</button>
-            <button class="view-comments">View comments</button>
-        </div>
-        <p class="post-details-container">
-            <!--<span title="tags">{{tags}}</span>-->
-        </p>
-        <hr/>
-    </article>
-    {{/articles}}
-</section>
+{{#articles}}
+<article data-id="{{_id}}">
+    <h2 class="article-title"><a style="color: {{titleColor}}" href="#">{{title}}</a></h2>
+    {{#imageBase64}}
+    <div class="header-image-container">
+        <img class="header-image" src="data:image/png;base64,{{imageBase64}}" alt="headerImage">
+    </div>
+    {{/imageBase64}}
+    {{#imageSrc}}
+    <div class="header-image-container">
+        <img class="header-image" src="{{imageSrc}}" alt="headerImage">
+    </div>
+    {{/imageSrc}}
+    <p class="post-content">{{contentSu}}</p>
+    <h3>Comments</h3>
+    <div class="comments">
+        <button class="add-comment">Add comment</button>
+        <button class="view-comments">View comments</button>
+    </div>
+    <p class="post-details-container">
+        <!--<span title="tags">{{tags}}</span>-->
+    </p>
+    <hr/>
+</article>
+{{/articles}}

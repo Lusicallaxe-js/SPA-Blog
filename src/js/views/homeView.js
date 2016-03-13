@@ -33,8 +33,6 @@ app.homeView = (function () {
                 });
             });
         });
-
-        $(selector).css('width', '100%');
     }
 
     return {

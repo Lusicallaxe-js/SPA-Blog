@@ -20,7 +20,7 @@ app.article = (function () {
             if (article.imageSrc) {
                 _this.imageSrc = article.imageSrc;
             } else {
-                base64(image).then(function (success) {
+                base64(article.image).then(function (success) {
                     _this.imageBase64 = success.base64;
                 }, function (e) {
                     def.reject(e);
@@ -56,8 +56,8 @@ app.article = (function () {
     }
 
     return {
-        get: function (title, titleColor, image, content, tags) {
-            return articleCreate(title, titleColor, image, content, tags);
+        get: function (articleObj) {
+            return articleCreate(articleObj);
         }
     }
 }());
