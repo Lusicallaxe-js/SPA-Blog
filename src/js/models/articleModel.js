@@ -13,19 +13,7 @@ app._articleModel = (function () {
     }
 
     Article.prototype.getArticles = function (query) {
-        var defer = Q.defer();
-
-        this._requester.makeRequest('GET', this.collectionUrl + query, null, true)
-            .then(function (data) {
-                var articlesData = {
-                    articles: data
-                };
-                defer.resolve(articlesData);
-            }, function (error) {
-                defer.reject(error);
-            });
-
-        return defer.promise;
+        return this._requester.makeRequest('GET', this.collectionUrl + query, null, true);
     };
 
     Article.prototype.addArticle = function (urlCollection, article) {

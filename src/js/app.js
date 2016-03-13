@@ -9,24 +9,6 @@ sessionStorage['sessionAuth'] = '0f0744cb-2c1c-49b8-bb1a-54ec662e993f.dEPvh5nJir
     var commentController = app.commentController.load(models.commentModel);
     var menuController = app.menuController.load(models.articleModel);
 
-    //$('#search-btn').click(function (e) {
-    //    var tagsToSearch = $('#search')
-    //        .val()
-    //        .trim()
-    //        .toLowerCase()
-    //        .split(/\s+/);
-    //
-    //    if (tagsToSearch.length) {
-    //        var query = '?query={"tags":{"$in":' + JSON.stringify(tagsToSearch) + '}}';
-    //        var url = 'articles' + query;
-    //        models.articleModel.getArticles(url)
-    //            .then(function (success) {
-    //                app.homeView.load('#articles', success);
-    //            }, function (error) {
-    //                console.log(error);
-    //            }).done();
-    //    }
-    //});
     menuController.loadSearch('#search-btn');
 
     app.router = Sammy(function () {
@@ -37,7 +19,7 @@ sessionStorage['sessionAuth'] = '0f0744cb-2c1c-49b8-bb1a-54ec662e993f.dEPvh5nJir
                 .then(function (success) {
                     articleController.getAdminPage(selector, true);
                 }, function (error) {
-                    articleController.getArticlePage(selector, false);
+                    articleController.getAllArticlesPage(selector, false);
                 })
         });
 
@@ -49,8 +31,8 @@ sessionStorage['sessionAuth'] = '0f0744cb-2c1c-49b8-bb1a-54ec662e993f.dEPvh5nJir
             userController.getLoginPage(selector);
         });
 
-        this.get('#/register', function () {
-            app.registerView.load(selector);
+        this.get('#/article/:id', function () {
+            articleController.getArticleByIdPage(this.params['id'], selector);
         });
 
         this.get('#/about', function () {

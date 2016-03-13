@@ -7,7 +7,7 @@ app.menuController = (function () {
         this.model = model;
         _this = this;
     }
-    
+
     MenuController.prototype.loadSearch = function (selector) {
         app.menuView.load(selector);
     };

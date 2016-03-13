@@ -9,10 +9,27 @@ app.articleController = function () {
     }
 
 
-    ArticleController.prototype.getArticlePage = function (selector) {
+    ArticleController.prototype.getAllArticlesPage = function (selector) {
         this.model.getArticles('articles')
-            .then(function (articlesData) {
+            .then(function (data) {
+                var articlesData = {
+                    articles: data
+                };
                 app.homeView.load(selector, articlesData);
+            })
+    };
+
+
+    ArticleController.prototype.getArticleByIdPage = function (id, selector) {
+        this.model.getArticles('articles/' + id)
+            .then(function (data) {
+                data.tags = {
+                    tagsObj: data.tags
+                };
+                var articlesData = {
+                    articles: data
+                };
+                app.articleView.load(selector, articlesData);
             })
     };
 
@@ -61,12 +78,6 @@ app.articleController = function () {
             }
         });
     });
-
-    function bindArticle(article) {
-        article.contentSummery = article.content.length > 100 ? article.content.slice(0, 100) : article.content;
-        article.tags = article.tags.split(/[\s+|,]+/);
-        article.rating = 0;
-    }
 
     return {
         load: function (model) {

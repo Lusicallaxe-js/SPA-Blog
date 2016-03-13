@@ -33,7 +33,6 @@ app.commentController = (function () {
 
 
     Sammy(function () {
-        var SammyObj;
 
         this.bind('view-comments-event', function (e, data) {
             _this.getComments(data.$element, data.id)
