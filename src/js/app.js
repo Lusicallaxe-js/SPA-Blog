@@ -15,12 +15,20 @@ sessionStorage['sessionAuth'] = '0f0744cb-2c1c-49b8-bb1a-54ec662e993f.dEPvh5nJir
         var selector = '#articles';
 
         this.get('#/', function () {
-            userController.isAdmin()
-                .then(function (success) {
-                    articleController.getAdminPage(selector, true);
-                }, function (error) {
-                    articleController.getAllArticlesPage(selector, false);
-                })
+            //userController.isAdmin()
+            //    .then(function (success) {
+            //        articleController.getAdminPage(selector, true);
+            //    }, function (error) {
+            articleController.getAllArticlesPage(selector, false);
+            //})
+        });
+
+        this.get('#/article/:id', function () {
+            articleController.getArticleByIdPage(this.params['id'], selector);
+        });
+
+        this.get('#/tag/:tag', function () {
+            menuController.search(this.params['tag']);
         });
 
         this.get('#/create-article', function () {
@@ -29,10 +37,6 @@ sessionStorage['sessionAuth'] = '0f0744cb-2c1c-49b8-bb1a-54ec662e993f.dEPvh5nJir
 
         this.get('#/login', function () {
             userController.getLoginPage(selector);
-        });
-
-        this.get('#/article/:id', function () {
-            articleController.getArticleByIdPage(this.params['id'], selector);
         });
 
         this.get('#/about', function () {

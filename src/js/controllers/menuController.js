@@ -12,17 +12,26 @@ app.menuController = (function () {
         app.menuView.load(selector);
     };
 
+    MenuController.prototype.search = function (tags) {
+        var input = tags
+            .trim()
+            .toLowerCase()
+            .split(/\s+/);
+
+        var query = '?query={"tags":{"$in":' + JSON.stringify(input) + '}}';
+        var url = 'articles' + query;
+        _this.model.getArticles(url)
+            .then(function (success) {
+                app.homeView.load('#articles', {articles: success});
+            }, function (error) {
+                console.log(error);
+            }).done();
+    };
+
+
     Sammy(function () {
-        var SammyObj;
         this.bind('search-event', function (e, data) {
-            var query = '?query={"tags":{"$in":' + JSON.stringify(data.tagsToSearch) + '}}';
-            var url = 'articles' + query;
-            _this.model.getArticles(url)
-                .then(function (success) {
-                    app.homeView.load('#articles', success);
-                }, function (error) {
-                    console.log(error);
-                }).done();
+            _this.search(data.tagsToSearch);
         });
     });
 

@@ -21,19 +21,12 @@ app._userModel = (function () {
     };
 
     User.prototype.isAdmin = function (id) {
-        //var defer = Q.defer();
         var data = {
             id: id
         };
         var url = 'rpc/' + this._requester.appId + '/custom/isAdmin';
         return this._requester.makeRequest('POST', url, data, true);
-        //.then(function (role) {
-        //    defer.resolve(role);
-        //}, function (error) {
-        //    defer.reject(error);
-        //});
-        //
-        //return defer.promise;
+
     };
 
     return {

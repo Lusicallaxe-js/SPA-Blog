@@ -7,13 +7,8 @@ app.menuView = (function () {
             var tagsToSearch = $('#search').val();
 
             if (tagsToSearch.length) {
-                var input = tagsToSearch
-                    .trim()
-                    .toLowerCase()
-                    .split(/\s+/);
-
                 Sammy(function () {
-                    this.trigger('search-event', {tagsToSearch: input});
+                    this.trigger('search-event', {tagsToSearch: tagsToSearch});
                 });
             }
         });
