@@ -92,7 +92,7 @@ var poppy = (function () {
 
             InfoPop = (function () {
                 function InfoPop(title, message) {
-                    Popup.call(this, title, message, 'info', 'topLeft', false, 1000, true);
+                    Popup.call(this, title, message, 'info', 'topLeft', true, 1000, true);
                 }
 
                 InfoPop.extends(Popup);
@@ -101,7 +101,7 @@ var poppy = (function () {
 
             ErrorPop = (function () {
                 function ErrorPop(title, message) {
-                    Popup.call(this, title, message, 'error', 'topRight', false, 1000, true, false);
+                    Popup.call(this, title, message, 'error', 'topRight', true, 1000, true, false);
                     this.popupData.fadeOutOnClick = true;
                 }
 
@@ -111,7 +111,7 @@ var poppy = (function () {
 
             WarningPop = (function () {
                 function WarningPop(title, message, callback) {
-                    Popup.call(this, title, message, 'warning', 'bottomRight', false, 0, false, callback);
+                    Popup.call(this, title, message, 'warning', 'bottomRight', true, 0, false, callback);
                 }
 
                 WarningPop.extends(Popup);
@@ -162,11 +162,11 @@ var poppy = (function () {
             var timeoutID = setTimeout(function () {
                 domView.style.opacity = 0;
                 clearTimeout(timeoutID);
-            }, 500);
+            }, 1200);
 
             setTimeout(function () {
                 $('.poppy-container').remove();
-            }, 800);
+            }, 2700);
         }
 
         function processPopup(domView, popup) {
