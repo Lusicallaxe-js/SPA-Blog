@@ -17,15 +17,14 @@ app.userController = (function () {
         return this.model.isAdmin(sessionStorage['id']);
     };
 
-    UserController.prototype.logout = function () {
-        return this.model.logout();
+    UserController.prototype.login = function (data) {
+        if (validateUser(data)) {
+            return this.model.login(data);
+        }
     };
 
     Sammy(function () {
         var SammyObj;
-        var f = function () {
-            return false;
-        };
         this.before('#/create-article', function () {
             SammyObj = this;
             _this.isAdmin()
@@ -38,30 +37,22 @@ app.userController = (function () {
                 });
         });
 
-
         this.bind('login-event', function (e, data) {
             SammyObj = this;
-            if (validateUser(data)) {
-                _this.model.login(data)
-                    .then(function (success) {
-                        if (success.role) {
-                            SammyObj.redirect('#/create-article');
-                            Sammy(function () {
-                                this.trigger('admin-event');
-                            })
-                        } else {
-                            SammyObj.redirect('#/');
-                        }
-                        //_this.isAdmin()
-                        //    .then(function (s) {
-                        //        SammyObj.redirect('#/cre');
-                        //    }, function (e) {
-                        //        poppy.pop('error', 'Access Denied.', '');
-                        //    })
-                    }, function (error) {
-                        poppy.pop('error', 'Wrong username or password!', '');
-                    });
-            }
+            _this.login(data)
+                .then(function (success) {
+                    if (success.role) {
+                        SammyObj.redirect('#/create-article');
+                        sessionStorage['isAdmin'] = true;
+                        Sammy(function () {
+                            this.trigger('admin-event');
+                        })
+                    } else {
+                        SammyObj.redirect('#/');
+                    }
+                }, function (error) {
+                    poppy.pop('error', 'Wrong username or password!', '');
+                });
         });
 
 

@@ -7,7 +7,7 @@ app.Requester = (function () {
         this.baseUrl = 'https://baas.kinvey.com/';
     }
 
-    Requester.prototype.makeRequest = function (method, url, dataObj, useSession) {
+    Requester.prototype.makeRequest = function (method, url, dataObj, useSession, asGuest) {
         var token,
             defer = Q.defer(),
             options = {
@@ -16,7 +16,7 @@ app.Requester = (function () {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                data: JSON.stringify(dataObj),
+                data: JSON.stringify(dataObj) || undefined,
                 success: function (data) {
                     defer.resolve(data);
                 },
@@ -25,17 +25,17 @@ app.Requester = (function () {
                 }
             };
 
-        if (!useSession) {
-            token = this.appId + ':' + this.appSecret;
-            options.beforeSend = function (xhr) {
-                xhr.setRequestHeader('Authorization', 'Basic ' + btoa(token));
-            };
-        } else {
-            token = sessionStorage['sessionAuth'];
-            options.beforeSend = function (xhr) {
-                xhr.setRequestHeader('Authorization', 'Kinvey ' + token);
-            };
-        }
+            if (!useSession) {
+                token = this.appId + ':' + this.appSecret;
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic ' + btoa(token));
+                };
+            } else {
+                token = sessionStorage['sessionAuth'];
+                options.beforeSend = function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Kinvey ' + token);
+                };
+            }
 
         $.ajax(options);
         return defer.promise;

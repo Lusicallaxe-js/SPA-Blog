@@ -31,7 +31,6 @@ app.articleController = function () {
                 var articlesData = {
                     articles: data
                 };
-                console.log(data);
                 app.articleView.load(selector, articlesData);
             }, function (error) {
                 console.log(error);

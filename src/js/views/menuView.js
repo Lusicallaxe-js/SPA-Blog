@@ -1,9 +1,9 @@
 var app = app || {};
 
 app.menuView = (function () {
-    function menuView(selector) {
+    function menuView() {
 
-        $(selector).click(function (e) {
+        $('#search-btn').click(function (e) {
             var tagsToSearch = $('#search').val();
 
             if (tagsToSearch.length) {
@@ -12,11 +12,17 @@ app.menuView = (function () {
                 });
             }
         });
+
+        $('#nav-logout').click(function (e) {
+            Sammy(function () {
+                this.trigger('logout-event');
+            });
+        });
     }
 
     return {
-        load: function (selector) {
-            return menuView(selector);
+        load: function () {
+            return menuView();
         }
     }
 }());

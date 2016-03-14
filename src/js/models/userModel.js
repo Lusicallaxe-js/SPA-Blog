@@ -22,7 +22,7 @@ app._userModel = (function () {
 
     User.prototype.logout = function () {
         var url = 'user/' + this._requester.appId + '/_logout';
-        return this._requester('POST', url, {}, true);
+        return this._requester.makeRequest('POST', url, {}, true);
     };
 
     User.prototype.isAdmin = function (id) {

@@ -8,8 +8,11 @@ app.menuController = (function () {
         _this = this;
     }
 
-    MenuController.prototype.loadSearch = function (selector) {
+    MenuController.prototype.loadMenu = function (selector) {
         app.menuView.load(selector);
+        if (sessionStorage['isAdmin']) {
+            $(document.body).trigger('admin-event');
+        }
     };
 
     MenuController.prototype.search = function (tags) {
@@ -22,7 +25,11 @@ app.menuController = (function () {
         var url = 'articles' + query;
         _this.model.getArticles(url)
             .then(function (success) {
-                app.homeView.load('#articles', {articles: success});
+                if (success.length) {
+                    app.homeView.load('#articles', {articles: success});
+                } else {
+                    poppy.pop('info', 'No Results Found', '');
+                }
             }, function (error) {
                 console.log(error);
             }).done();
