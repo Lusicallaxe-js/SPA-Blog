@@ -17,6 +17,10 @@ app.userController = (function () {
         return this.model.isAdmin(sessionStorage['id']);
     };
 
+    UserController.prototype.logout = function () {
+        return this.model.logout();
+    };
+
     Sammy(function () {
         var SammyObj;
         var f = function () {
@@ -26,7 +30,10 @@ app.userController = (function () {
             SammyObj = this;
             _this.isAdmin()
                 .then(function (s) {
-                }, function (e) {
+                    if (!s.role) {
+                        SammyObj.redirect('#/');
+                    }
+                }, function (error) {
                     SammyObj.redirect('#/');
                 });
         });
@@ -39,6 +46,9 @@ app.userController = (function () {
                     .then(function (success) {
                         if (success.role) {
                             SammyObj.redirect('#/create-article');
+                            Sammy(function () {
+                                this.trigger('admin-event');
+                            })
                         } else {
                             SammyObj.redirect('#/');
                         }

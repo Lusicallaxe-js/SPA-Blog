@@ -33,6 +33,11 @@ app.menuController = (function () {
         this.bind('search-event', function (e, data) {
             _this.search(data.tagsToSearch);
         });
+
+        this.bind('admin-event', function (e, data) {
+            $('#nav-authors > a:contains(Login)').text('Logout');
+            $('#nav-menu').append('<li id="nav-authors"><a href="#/create-article">Create Article</a></li>');
+        });
     });
 
     return {

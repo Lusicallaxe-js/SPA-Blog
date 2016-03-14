@@ -20,6 +20,11 @@ app._userModel = (function () {
         return defer.promise;
     };
 
+    User.prototype.logout = function () {
+        var url = 'user/' + this._requester.appId + '/_logout';
+        return this._requester('POST', url, {}, true);
+    };
+
     User.prototype.isAdmin = function (id) {
         var data = {
             id: id
