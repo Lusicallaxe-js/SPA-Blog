@@ -8,12 +8,22 @@ app.articleView = (function () {
             var output = Mustache.render(template, articlesData);
             $(selector).append(output);
 
+            var $email = $('#input-email');
+            var $name = $('#input-name');
+            var $content = $('#input-text');
+
             $('.add-comment').click(function () {
                 var id = $(this).closest('article').attr('data-id');
                 var element = $(this).closest('.comments');
-                var content = prompt('Content');
-                var name = prompt('name?');
-                var email = prompt('email?');
+
+                var content = $content.val();
+                var name = $name.val();
+                var email = $email.val();
+
+                $content.val('');
+                $name.val('');
+                $email.val('');
+
                 Sammy(function () {
                     this.trigger('add-comment-event', {
                         "$element": element,

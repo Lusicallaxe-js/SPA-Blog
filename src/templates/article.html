@@ -24,17 +24,20 @@
           </span>
     </p>
     <h3>Comments</h3>
+    <input type="text" id="input-name" placeholder="Enter your name"/>
+    <input type="email" id="input-email" placeholder="Enter your email"/>
+    <textarea id="input-text" rows="10" cols="50" placeholder="Enter your comment here" style="resize: none"></textarea>
     <div class="comments">
         <button class="add-comment">Add comment</button>
         <button class="view-comments">View comments</button>
-        {{#comments}}
+        <!--{{#comments}}
         <p>{{comment.content}}</p>
         <p>{{comment.author}}</p>
             <span class="title-buttons">
                 <button id="edit-comment">edit</button>
                 <button id="delete-comment">x</button>
             </span>
-        {{/comments}}
+        {{/comments}}-->
 
     </div>
     <p class="post-details-container">
@@ -46,5 +49,6 @@
     </p>
 </article>
 {{/articles}}
+
 
 
