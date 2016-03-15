@@ -78,8 +78,9 @@ app.articleController = function () {
             SammyObj = this;
             _this.deleteArticleById(data.id)
                 .then(function (success) {
+                    $('article').hide('slow');
                     SammyObj.redirect('#/');
-                })
+                }).done();
         });
 
         this.bind('save-article-event', function (e, data) {

@@ -24,18 +24,19 @@ app.commentController = (function () {
     };
 
     CommentController.prototype.addComment = function (comment) {
-
-        var dataComment = {
-            "content": comment.content,
-            "author": comment.author,
-            "email": comment.email,
-            "article": {
-                "_type": 'KinveyRef',
-                "_id": comment.articleId,
-                "_collection": 'articles'
-            }
-        };
-        this.model.addComment('comments', dataComment);
+        if (validateComment(comment)) {
+            var dataComment = {
+                "content": comment.content,
+                "author": comment.author,
+                "email": comment.email,
+                "article": {
+                    "_type": 'KinveyRef',
+                    "_id": comment.articleId,
+                    "_collection": 'articles'
+                }
+            };
+            this.model.addComment('comments', dataComment);
+        }
     };
 
 
@@ -54,10 +55,16 @@ app.commentController = (function () {
         });
     });
 
-    function validateArticle(article) {
-        if (!article.title || !article.content) {
-            throw new Error('Invalid title and content')
+    function validateComment(comment) {
+        if (!comment.author) {
+            poppy.pop('info', 'Enter your name', '');
+            return false;
         }
+        if (!comment.content) {
+            poppy.pop('info', 'Enter your comment', '');
+            return false;
+        }
+        return true;
     }
 
     return {
