@@ -5,7 +5,6 @@ app._userModel = (function () {
         this._requester = requester;
     }
 
-
     User.prototype.login = function (data) {
         var defer = Q.defer();
         var url = 'user/' + this._requester.appId + '/login';

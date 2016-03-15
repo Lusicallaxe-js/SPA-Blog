@@ -11,7 +11,7 @@ app.menuController = (function () {
     MenuController.prototype.loadMenu = function (selector) {
         app.menuView.load(selector);
         if (sessionStorage['isAdmin']) {
-            $(document.body).trigger('admin-event');
+            addAdminNav();
         }
     };
 
@@ -35,6 +35,10 @@ app.menuController = (function () {
             }).done();
     };
 
+    function addAdminNav() {
+        $('#nav-login').find('> a:contains(Login)').text('Logout').attr('href', '#/logout');
+        $('#nav-menu').append('<li id="nav-authors"><a href="#/create-article">Create Article</a></li>');
+    }
 
     Sammy(function () {
         this.bind('search-event', function (e, data) {
@@ -43,8 +47,7 @@ app.menuController = (function () {
         });
 
         this.bind('admin-event', function (e, data) {
-            $('#nav-authors > a:contains(Login)').text('Logout');
-            $('#nav-menu').append('<li id="nav-authors"><a href="#/create-article">Create Article</a></li>');
+            addAdminNav();
         });
     });
 

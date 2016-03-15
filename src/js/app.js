@@ -1,5 +1,5 @@
 var app = app || {};
-sessionStorage['sessionAuth'] = 'c80bf3ac-ba07-4ab9-bebe-5bd2e4cfb9c4.X4pj7hnkNWh9mVpKNsMb+8COSaZs3RlscSETlZnPlh8=';
+//sessionStorage['sessionAuth'] = 'c80bf3ac-ba07-4ab9-bebe-5bd2e4cfb9c4.X4pj7hnkNWh9mVpKNsMb+8COSaZs3RlscSETlZnPlh8=';
 (function () {
     var requester = new app.Requester('kid_-ke8mBy-kZ', '1f03be196d7447e3a2a94b483c32061c');
     var models = app.model.loadModels(requester);
@@ -44,6 +44,9 @@ sessionStorage['sessionAuth'] = 'c80bf3ac-ba07-4ab9-bebe-5bd2e4cfb9c4.X4pj7hnkNW
 
         this.get('#/search', function () {
 
+        });
+        this.get('#/logout', function () {
+            userController.logout();
         });
     });
     app.router.run('#/');

@@ -8,11 +8,11 @@ app.article = (function () {
         _this.titleColor = article.titleColor;
         _this.content = article.content;
         _this.contentSummery = article.content.length > 100 ? article.content.slice(0, 100) : article.content;
-        _this.tags = article.tags.toLowerCase().split(/[\s+|,]+/);
+        _this.tags = article.tags.trim().toLowerCase().split(/[\s+|,]+/);
         _this.tags = _this.tags.filter(function (x) {
             return x;
         });
-        article.title.toLowerCase().split(/\s+/).forEach(function (e) {
+        article.title.trim().toLowerCase().split(/\s+/).forEach(function (e) {
             _this.tags.push(e);
         });
         _this.tags = _this.tags.unique();

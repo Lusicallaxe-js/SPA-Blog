@@ -26,15 +26,23 @@ app.Requester = (function () {
             };
 
             if (!useSession) {
-                token = this.appId + ':' + this.appSecret;
+                token =  'guest:1234';
                 options.beforeSend = function (xhr) {
                     xhr.setRequestHeader('Authorization', 'Basic ' + btoa(token));
                 };
+                //token = this.appId + ':' + this.appSecret;
+                //options.beforeSend = function (xhr) {
+                //    xhr.setRequestHeader('Authorization', 'Basic ' + btoa(token));
+                //};
             } else {
-                token = sessionStorage['sessionAuth'];
+                token =  'guest:1234';
                 options.beforeSend = function (xhr) {
-                    xhr.setRequestHeader('Authorization', 'Kinvey ' + token);
+                    xhr.setRequestHeader('Authorization', 'Basic ' + btoa(token));
                 };
+                //token = sessionStorage['sessionAuth'];
+                //options.beforeSend = function (xhr) {
+                //    xhr.setRequestHeader('Authorization', 'Kinvey ' + token);
+                //};
             }
 
         $.ajax(options);

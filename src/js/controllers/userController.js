@@ -23,6 +23,16 @@ app.userController = (function () {
         }
     };
 
+    UserController.prototype.logout = function () {
+        //this.model.logout()
+        //    .then(function () {
+        sessionStorage.clear();
+        $('#nav-login').find('> a:contains(Logout)').text('Login').attr('href', '#/login');
+        $('#nav-authors').hide();
+        //sessionStorage['']
+        //})
+    };
+
     Sammy(function () {
         var SammyObj;
         this.before('#/create-article', function () {
