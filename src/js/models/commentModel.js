@@ -29,8 +29,11 @@ app._commentModel = (function () {
     };
 
     CommentModel.prototype.addComment = function (urlCollection, comment) {
-
         return this._requester.makeRequest('POST', this.collectionUrl + urlCollection, comment, true)
+    };
+
+    CommentModel.prototype.deleteComment = function (urlCollectionAndId) {
+        return this._requester.makeRequest('DELETE', this.collectionUrl + urlCollectionAndId, {}, true)
     };
 
     return {

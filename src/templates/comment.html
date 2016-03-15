@@ -1,9 +1,15 @@
 {{#comments}}
-<div data-id="{{_id}}">
+<div data-id="{{_id}}" style="background-color: #51a351;margin: 15px 0;border-radius: 10px;padding: 8px">
+    {{#isAdmin}}
+    <button class="delete-comment-btn" style="color: red;float: right; margin: 10px;font-size: 20px">X</button>
+    {{/isAdmin}}
     <p><strong>comment: </strong>{{content}}</p>
     <p><strong>user: </strong>{{author}}</p>
     {{#email}}
     <p><strong>email: </strong>{{email}}</p>
     {{/email}}
 </div>
+{{/comments}}
+{{^comments}}
+<p>No comments yet.</p>
 {{/comments}}

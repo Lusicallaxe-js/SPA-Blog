@@ -4,18 +4,22 @@ app.commentView = (function () {
     function commentView(selector, commentData) {
         selector.find('*').not('button').remove();
 
+        if ($('#delete-article').length) {
+            commentData.isAdmin = true;
+        }
+
         $.get('templates/comment.html', function (template) {
             var output = Mustache.render(template, commentData);
             selector.append(output);
 
-            //$('#create-article-btn').click(function () {
-            //    Sammy(function () {
-            //        this.trigger('add-article-event');
-            //    });
-            //});
+            $('.delete-comment-btn').click(function () {
+                var id = $(this).closest('div').hide('slow').attr('data-id');
+                Sammy(function () {
+                    this.trigger('delete-comment-event', {commentId: id});
+                });
+            });
         });
 
-        //$(selector).css('width', '100%');
     }
 
     return {

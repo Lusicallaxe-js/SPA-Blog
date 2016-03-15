@@ -16,6 +16,13 @@ app.commentController = (function () {
             })
     };
 
+    CommentController.prototype.deleteComment = function (id) {
+        this.model.deleteComment('comments/' + id)
+            .then(function (articlesData) {
+                app.commentView.load(element, articlesData);
+            })
+    };
+
     CommentController.prototype.addComment = function (comment) {
 
         var dataComment = {
@@ -40,6 +47,10 @@ app.commentController = (function () {
 
         this.bind('add-comment-event', function (e, data) {
             _this.addComment(data)
+        });
+
+        this.bind('delete-comment-event', function (e, data) {
+            _this.deleteComment(data.commentId);
         });
     });
 

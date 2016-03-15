@@ -17,10 +17,20 @@
         <img class="header-image" src="{{imageSrc}}" alt="headerImage">
     </div>
     {{/imageSrc}}
-    <p class="post-content">
+    <p style="padding: 7px" class="post-content">
         {{content}}
     </p>
-    <h3>Comments</h3>
+    <br>
+    <p class="post-details-container" style="text-align: center;font-size: 13px">
+        Tags: |
+        <span title="tags">
+            {{#tags}}
+            <a href="#/tag/{{tag}}"> {{tag}} |</a>
+            {{/tags}}
+        </span>
+    </p>
+    <br>
+    <h3>Leave a comment</h3>
     <input type="text" id="input-name" placeholder="Enter your name"/>
     <input type="email" id="input-email" placeholder="Enter your email"/>
     <textarea id="input-text" rows="4" placeholder="Enter your comment here"
@@ -29,13 +39,6 @@
         <button class="add-comment">Add comment</button>
         <button class="view-comments">View comments</button>
     </div>
-    <p class="post-details-container">
-        <span title="tags">
-            {{#tags}}
-            <a href="#/tag/{{tag}}">{{tag}}</a>
-            {{/tags}}
-        </span>
-    </p>
 </article>
 {{/articles}}
 
