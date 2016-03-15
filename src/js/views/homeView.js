@@ -7,6 +7,20 @@ app.homeView = (function () {
         $.get('templates/home.html', function (template) {
             var output = Mustache.render(template, articlesData);
             $(selector).append(output);
+            $(selector).append('<div style="width: 100%;-webkit-user-select: none; " id="paging"><a id="prev">« Back</a>' +
+                '<a id="next">Next »</a></div>');
+
+            $('#prev').click(function () {
+                Sammy(function () {
+                    this.trigger('previous-page-event');
+                });
+            });
+
+            $('#next').click(function () {
+                Sammy(function () {
+                    this.trigger('next-page-event');
+                });
+            });
         });
 
         $(selector).css('width', '65%');

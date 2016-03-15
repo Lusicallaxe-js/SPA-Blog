@@ -1,17 +1,22 @@
 var app = app || {};
 
 app.articleController = function () {
-    var _this;
+    var _this,
+        currentPage,
+        isOver;
 
     function ArticleController(model) {
         this.model = model;
         _this = this;
+        currentPage = 1;
     }
 
 
-    ArticleController.prototype.getAllArticlesPage = function (selector) {
-        this.model.getArticles('articles')
+    ArticleController.prototype.getArticlesPage = function (selector) {
+        console.log(currentPage);
+        this.model.getArticles('articles?query={}&limit=4&skip=' + (currentPage - 1) * 4)
             .then(function (data) {
+                data.length < 4 ? isOver = true : isOver = false;
                 var articlesData = {
                     articles: data
                 };
@@ -72,6 +77,22 @@ app.articleController = function () {
 
         this.bind('add-article-event', function (e, data) {
             this.redirect('#/create-article');
+        });
+
+        this.bind('next-page-event', function (e, data) {
+            if (!isOver) {
+                currentPage++;
+                _this.getArticlesPage('#articles')
+            }
+        });
+
+        this.bind('previous-page-event', function (e, data) {
+            currentPage--;
+            if (currentPage < 1) {
+                currentPage = 1;
+                return false;
+            }
+            _this.getArticlesPage('#articles')
         });
 
         this.bind('delete-article-event', function (e, data) {

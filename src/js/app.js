@@ -15,7 +15,7 @@ sessionStorage['sessionAuth'] = 'c80bf3ac-ba07-4ab9-bebe-5bd2e4cfb9c4.X4pj7hnkNW
         var selector = '#articles';
 
         this.get('#/', function () {
-            articleController.getAllArticlesPage(selector, false);
+            articleController.getArticlesPage(selector);
         });
 
         this.get('#/article/:id', function () {
@@ -40,10 +40,6 @@ sessionStorage['sessionAuth'] = 'c80bf3ac-ba07-4ab9-bebe-5bd2e4cfb9c4.X4pj7hnkNW
 
         this.get('#/login', function () {
             userController.getLoginPage(selector);
-        });
-
-        this.get('#/about', function () {
-            app.aboutView.load(selector);
         });
     });
     app.router.run('#/');
