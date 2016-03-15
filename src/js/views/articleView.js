@@ -1,11 +1,11 @@
 var app = app || {};
 
 app.articleView = (function () {
-    function articleView(selector, articlesData) {
+    function articleView(selector, data) {
         $(selector).empty();
 
         $.get('templates/article.html', function (template) {
-            var output = Mustache.render(template, articlesData);
+            var output = Mustache.render(template, data);
             $(selector).append(output);
 
             var $email = $('#input-email');
@@ -43,11 +43,20 @@ app.articleView = (function () {
                 });
             });
 
-            //$('#create-article-btn').click(function () {
-            //    Sammy(function () {
-            //        this.trigger('add-article-event');
-            //    });
-            //});
+            if (data.isAdmin) {
+                $('#delete-article').click(function () {
+                    var id = $(this).closest('article').attr('data-id');
+                    Sammy(function () {
+                        this.trigger('delete-article-event', {"id": id});
+                    });
+                });
+                $('#edit-article').click(function () {
+                    var id = $(this).closest('article').attr('data-id');
+                    Sammy(function () {
+                        this.trigger('edit-article-event', {"id": id});
+                    });
+                })
+            }
         });
 
         $(selector).css('width', '100%');

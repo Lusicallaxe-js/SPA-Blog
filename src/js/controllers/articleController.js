@@ -19,8 +19,7 @@ app.articleController = function () {
             })
     };
 
-
-    ArticleController.prototype.getArticleByIdPage = function (id, selector) {
+    ArticleController.prototype.getArticleByIdPage = function (id, selector, isAdmin) {
         this.model.getArticles('articles/' + id)
             .then(function (data) {
                 var dataO = [];
@@ -29,9 +28,14 @@ app.articleController = function () {
                 });
                 data.tags = dataO;
                 var articlesData = {
-                    articles: data
+                    articles: data,
+                    isAdmin: isAdmin
                 };
+                //if (isAdmin) {
                 app.articleView.load(selector, articlesData);
+                //} else {
+                //    app.articleView.load(selector, articlesData);
+                //}
             }, function (error) {
                 console.log(error);
             })
@@ -44,21 +48,23 @@ app.articleController = function () {
             })
     };
 
-    ArticleController.prototype.getCreateArticlePage = function (selector) {
-        //if (sessionStorage['id']) {
-        //    this.model.userModel.isAdmin(sessionStorage['id'])
-        //        .then(function (success) {
-        //            console.log(success);
-        app.createArticleView.load(selector);
-        //}, function (error) {
-        //    console.log('You do not have Administrator access!');
-        //    window.location.replace('#/');
-        //})
-        //} else {
-        //    console.log('Yoy must login first!');
-        //    window.location.replace('#/');
-        //}
+    ArticleController.prototype.deleteArticleById = function (id) {
+        return this.model.deleteArticleById(id);
+    };
 
+    ArticleController.prototype.editArticleById = function (id, article) {
+        return this.model.editArticle(id, article);
+    };
+
+    ArticleController.prototype.getCreateArticlePage = function (selector) {
+        app.createArticleView.load(selector, {});
+    };
+
+    ArticleController.prototype.getEditArticlePage = function (selector, articleId) {
+        this.model.getArticles('articles/' + articleId)
+            .then(function (success) {
+                app.createArticleView.load(selector, success);
+            })
     };
 
     Sammy(function () {
@@ -66,6 +72,26 @@ app.articleController = function () {
 
         this.bind('add-article-event', function (e, data) {
             this.redirect('#/create-article');
+        });
+
+        this.bind('delete-article-event', function (e, data) {
+            SammyObj = this;
+            _this.deleteArticleById(data.id)
+                .then(function (success) {
+                    SammyObj.redirect('#/');
+                })
+        });
+
+        this.bind('save-article-event', function (e, data) {
+            SammyObj = this;
+            _this.editArticleById(data.id, data.article)
+                .then(function (success) {
+                    SammyObj.redirect('#/');
+                }).done();
+        });
+
+        this.bind('edit-article-event', function (e, data) {
+            _this.getEditArticlePage('#articles', data.id);
         });
 
         this.bind('post-article-event', function (e, data) {

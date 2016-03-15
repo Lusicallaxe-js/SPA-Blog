@@ -4,22 +4,27 @@
         <div>
             <label for="color">Chose title color</label>
             <input type="color" value="#ffffff" id="color">
-            <input type="text" id="title" placeholder="Title...">
+            <input type="text" id="title" value="{{title}}" placeholder="Title...">
         </div>
 
         <div class="input-group">
             <label for="upload-picture">Upload header image</label>
             <input type="file" id="upload-picture">
             <label for="picture-src">Or add header image src (strongly recommended)</label>
-            <input type="url" id="picture-src">
+            <input type="url" value="{{imageSrc}}" placeholder="Image Src" id="picture-src">
         </div>
 
         <div>
-            <textarea id="content" placeholder="Content..."></textarea>
+            <textarea id="content" placeholder="Content...">{{content}}</textarea>
         </div>
         <div>
-            <input type="text" id="tags" placeholder="Tags separated by space ">
+            <input type="text" id="tags" value="{{tags}}" placeholder="Tags separated by space ">
         </div>
-        <button id="post-article" type="button">Post</button>
+        {{#title}}
+        <button id="edit-article-btn" type="button" data-id="{{_id}}">Save changes</button>
+        {{/title}}
+        {{^title}}
+        <button id="post-article-btn" type="button">Post</button>
+        {{/title}}
     </form>
 </section>

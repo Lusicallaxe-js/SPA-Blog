@@ -1,11 +1,11 @@
 {{#articles}}
 <article style="width: 47%" data-id="{{_id}}">
-    <h1>Full</h1>
+    {{#isAdmin}}
+    <button id="delete-article">Delete article</button>
+    <button id="edit-article">Edit Article</button>
+    {{/isAdmin}}
     <h2 class="article-title">
         <a style="color: {{titleColor}}" href="#">{{title}}</a>
-        <span class="title-buttons">
-                <button id="edit-title">edit</button>
-        </span>
     </h2>
     {{#imageBase64}}
     <div class="header-image-container">
@@ -19,26 +19,15 @@
     {{/imageSrc}}
     <p class="post-content">
         {{content}}
-          <span class="content-buttons">
-                <button id="edit-content">edit</button>
-          </span>
     </p>
     <h3>Comments</h3>
     <input type="text" id="input-name" placeholder="Enter your name"/>
     <input type="email" id="input-email" placeholder="Enter your email"/>
-    <textarea id="input-text" rows="10" cols="50" placeholder="Enter your comment here" style="resize: none"></textarea>
+    <textarea id="input-text" rows="4" placeholder="Enter your comment here"
+              style="resize: none; width: 97%"></textarea>
     <div class="comments">
         <button class="add-comment">Add comment</button>
         <button class="view-comments">View comments</button>
-        <!--{{#comments}}
-        <p>{{comment.content}}</p>
-        <p>{{comment.author}}</p>
-            <span class="title-buttons">
-                <button id="edit-comment">edit</button>
-                <button id="delete-comment">x</button>
-            </span>
-        {{/comments}}-->
-
     </div>
     <p class="post-details-container">
         <span title="tags">
