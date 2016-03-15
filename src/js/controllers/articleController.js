@@ -13,7 +13,6 @@ app.articleController = function () {
 
 
     ArticleController.prototype.getArticlesPage = function (selector) {
-        console.log(currentPage);
         this.model.getArticles('articles?query={}&limit=4&skip=' + (currentPage - 1) * 4)
             .then(function (data) {
                 data.length < 4 ? isOver = true : isOver = false;

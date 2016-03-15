@@ -12,8 +12,11 @@ app.article = (function () {
         _this.tags = _this.tags.filter(function (x) {
             return x;
         });
-        _this.tags.push(article.title.toLowerCase());
-        _this.rating = 0;
+        article.title.toLowerCase().split(/\s+/).forEach(function (e) {
+            _this.tags.push(e);
+        });
+        _this.tags = _this.tags.unique();
+        _this.rating = 0 || article.rating;
         if (!article.imageSrc && !article.image) {
             def.resolve(_this);
         } else {
@@ -54,6 +57,13 @@ app.article = (function () {
 
         return defer.promise;
     }
+
+    Array.prototype.unique = function () {
+        var o = {}, i, l = this.length, r = [];
+        for (i = 0; i < l; i += 1) o[this[i]] = this[i];
+        for (i in o) r.push(o[i]);
+        return r;
+    };
 
     return {
         get: function (articleObj) {

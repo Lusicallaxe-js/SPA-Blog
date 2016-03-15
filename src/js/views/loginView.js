@@ -20,7 +20,7 @@ app.loginView = (function () {
         });
 
 
-        $(selector).css('width', '200px');
+        //$(selector).css('width', '200px');
     }
 
     return {

@@ -3,12 +3,16 @@
     <h2 class="article-title"><a style="color: {{titleColor}}" href="#/article/{{_id}}">{{title}}</a></h2>
     {{#imageBase64}}
     <div class="header-image-container">
-        <img class="header-image" src="data:image/png;base64,{{imageBase64}}" alt="headerImage">
+        <a href="#/article/{{_id}}">
+            <img class="header-image" src="data:image/png;base64,{{imageBase64}}" alt="headerImage">
+        </a>
     </div>
     {{/imageBase64}}
     {{#imageSrc}}
     <div class="header-image-container">
-        <img class="header-image" src="{{imageSrc}}" alt="headerImage">
+        <a href="#/article/{{_id}}">
+            <img class="header-image" src="{{imageSrc}}" alt="headerImage">
+        </a>
     </div>
     {{/imageSrc}}
     <p class="post-content">{{contentSummery}}<a style="color: red" href="#/article/{{_id}}">[...]</a></p>
@@ -16,8 +20,8 @@
     <a href="#/article/{{_id}}">
         <button class="read-more">Read more</button>
     </a>
-    <p class="post-details-container">
-        <!--<span title="tags">{{tags}}</span>-->
-    </p>
 </article>
+{{/articles}}
+{{^articles}}
+<h3>No more articles</h3>
 {{/articles}}

@@ -15,16 +15,21 @@
         </div>
 
         <div>
-            <textarea id="content" placeholder="Content...">{{content}}</textarea>
+            <textarea id="content" rows="12" style="resize: none; width: 100%"
+                      placeholder="Content...">{{content}}</textarea>
         </div>
         <div>
-            <input type="text" id="tags" value="{{tags}}" placeholder="Tags separated by space ">
+            <label for="tags">Tags</label>
+            <input type="text" id="tags" value="{{tags}}" style="width: 40%" placeholder="Separated by spaces or comma">
         </div>
         {{#title}}
         <button id="edit-article-btn" type="button" data-id="{{_id}}">Save changes</button>
         {{/title}}
         {{^title}}
-        <button id="post-article-btn" type="button">Post</button>
+        <button id="post-article-btn"
+                style="margin: 20px 60px;border-radius: 10px ;font-size: 20px;padding: 10px 40px;background-color: #31b401;border: 2px solid"
+                type="button">Post
+        </button>
         {{/title}}
     </form>
 </section>

@@ -1,11 +1,13 @@
 var app = app || {};
 
 app.menuView = (function () {
+    var $searchInput = $('#search');
+
     function menuView() {
 
         $('#search-btn').click(function (e) {
-            var tagsToSearch = $('#search').val();
-
+            var tagsToSearch = $searchInput.val();
+            $searchInput.val('');
             if (tagsToSearch.length) {
                 Sammy(function () {
                     this.trigger('search-event', {tagsToSearch: tagsToSearch});

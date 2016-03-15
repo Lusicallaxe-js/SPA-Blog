@@ -16,7 +16,7 @@ app.menuController = (function () {
     };
 
     MenuController.prototype.search = function (tags) {
-        var input = tags
+        var input = encodeURIComponent(tags)
             .trim()
             .toLowerCase()
             .split(/\s+/);
@@ -26,7 +26,7 @@ app.menuController = (function () {
         _this.model.getArticles(url)
             .then(function (success) {
                 if (success.length) {
-                    app.homeView.load('#articles', {articles: success});
+                    app.searchResultView.load('#articles', {articles: success});
                 } else {
                     poppy.pop('info', 'No Results Found', '');
                 }
@@ -38,6 +38,7 @@ app.menuController = (function () {
 
     Sammy(function () {
         this.bind('search-event', function (e, data) {
+            this.redirect('#/search');
             _this.search(data.tagsToSearch);
         });
 

@@ -41,6 +41,10 @@ sessionStorage['sessionAuth'] = 'c80bf3ac-ba07-4ab9-bebe-5bd2e4cfb9c4.X4pj7hnkNW
         this.get('#/login', function () {
             userController.getLoginPage(selector);
         });
+
+        this.get('#/search', function () {
+
+        });
     });
     app.router.run('#/');
 }());
