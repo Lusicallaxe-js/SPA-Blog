@@ -14,7 +14,8 @@ app.Requester = (function () {
                 method: method,
                 url: this.baseUrl + url,
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + btoa('guest:1234')
                 },
                 data: JSON.stringify(dataObj) || undefined,
                 success: function (data) {
@@ -25,25 +26,25 @@ app.Requester = (function () {
                 }
             };
 
-            if (!useSession) {
-                token =  'guest:1234';
-                options.beforeSend = function (xhr) {
-                    xhr.setRequestHeader('Authorization', 'Basic ' + btoa(token));
-                };
-                //token = this.appId + ':' + this.appSecret;
-                //options.beforeSend = function (xhr) {
-                //    xhr.setRequestHeader('Authorization', 'Basic ' + btoa(token));
-                //};
-            } else {
-                token =  'guest:1234';
-                options.beforeSend = function (xhr) {
-                    xhr.setRequestHeader('Authorization', 'Basic ' + btoa(token));
-                };
-                //token = sessionStorage['sessionAuth'];
-                //options.beforeSend = function (xhr) {
-                //    xhr.setRequestHeader('Authorization', 'Kinvey ' + token);
-                //};
-            }
+        //if (!useSession) {
+        //    token =  'guest:1234';
+        //    options.beforeSend = function (xhr) {
+        //        xhr.setRequestHeader('Authorization', 'Basic ' + btoa(token));
+        //    };
+        //token = this.appId + ':' + this.appSecret;
+        //options.beforeSend = function (xhr) {
+        //    xhr.setRequestHeader('Authorization', 'Basic ' + btoa(token));
+        //};
+        //} else {
+        //    token =  'guest:1234';
+        //    options.beforeSend = function (xhr) {
+        //        xhr.setRequestHeader('Authorization', 'Basic ' + btoa(token));
+        //    };
+        //token = sessionStorage['sessionAuth'];
+        //options.beforeSend = function (xhr) {
+        //    xhr.setRequestHeader('Authorization', 'Kinvey ' + token);
+        //};
+        //}
 
         $.ajax(options);
         return defer.promise;

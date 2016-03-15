@@ -19,18 +19,28 @@ app.userController = (function () {
 
     UserController.prototype.login = function (data) {
         if (validateUser(data)) {
-            return this.model.login(data);
+            this.model.login(data)
+                .then(function (success) {
+                    if (success.role) {
+                        sessionStorage['isAdmin'] = true;
+                        Sammy(function () {
+                            this.trigger('admin-event');
+                        });
+                        window.location.replace('#/');
+                    } else {
+                        //SammyObj.redirect('#/');
+                    }
+                }, function (error) {
+                    poppy.pop('error', 'Wrong username or password!', '');
+                });
         }
+        return false;
     };
 
     UserController.prototype.logout = function () {
-        //this.model.logout()
-        //    .then(function () {
         sessionStorage.clear();
         $('#nav-login').find('> a:contains(Logout)').text('Login').attr('href', '#/login');
-        $('#nav-authors').hide();
-        //sessionStorage['']
-        //})
+        $('#nav-authors').remove();
     };
 
     Sammy(function () {
@@ -48,21 +58,7 @@ app.userController = (function () {
         });
 
         this.bind('login-event', function (e, data) {
-            SammyObj = this;
-            _this.login(data)
-                .then(function (success) {
-                    if (success.role) {
-                        SammyObj.redirect('#/create-article');
-                        sessionStorage['isAdmin'] = true;
-                        Sammy(function () {
-                            this.trigger('admin-event');
-                        })
-                    } else {
-                        SammyObj.redirect('#/');
-                    }
-                }, function (error) {
-                    poppy.pop('error', 'Wrong username or password!', '');
-                });
+            _this.login(data);
         });
 
 
