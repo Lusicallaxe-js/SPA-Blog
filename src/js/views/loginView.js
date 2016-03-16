@@ -1,6 +1,7 @@
 var app = app || {};
 
 app.loginView = (function () {
+    "use strict";
     function loginView(selector) {
         $(selector).empty();
 

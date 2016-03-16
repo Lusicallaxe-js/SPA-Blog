@@ -1,6 +1,7 @@
 var app = app || {};
 
 app.commentController = (function () {
+    "use strict";
     var _this;
 
     function CommentController(model) {
@@ -19,8 +20,12 @@ app.commentController = (function () {
     CommentController.prototype.deleteComment = function (id) {
         this.model.deleteComment('comments/' + id)
             .then(function (articlesData) {
-                app.commentView.load(element, articlesData);
+                app.commentView.load(articlesData);
             })
+    };
+
+    CommentController.prototype.deleteAllArticleComments = function (articleId) {
+        return this.model.deleteComment('comments/?query={"article._id":"' + articleId + '"}');
     };
 
     CommentController.prototype.addComment = function (comment) {
@@ -52,6 +57,10 @@ app.commentController = (function () {
 
         this.bind('delete-comment-event', function (e, data) {
             _this.deleteComment(data.commentId);
+        });
+
+        this.bind('delete-all-comments-event', function (e, data) {
+            _this.deleteAllArticleComments(data.articleId);
         });
     });
 

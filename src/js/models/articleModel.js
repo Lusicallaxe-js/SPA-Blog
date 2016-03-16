@@ -1,20 +1,17 @@
 var app = app || {};
 
 app._articleModel = (function () {
+    "use strict";
     var _this = this;
 
     function Article(requester) {
         this._requester = requester;
         this.collectionUrl = 'appdata/' + requester.appId + '/';
-        this._posts = {
-            posts: []
-        };
         _this = this;
     }
 
     Article.prototype.getArticles = function (query) {
         return this._requester.get(this.collectionUrl + query);
-        //return this._requester.makeRequest('GET', this.collectionUrl + query, null, true);
     };
 
     Article.prototype.deleteArticleById = function (id) {

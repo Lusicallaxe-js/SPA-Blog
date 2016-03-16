@@ -1,6 +1,7 @@
 var app = app || {};
 
 app.articleView = (function () {
+    "use strict";
     function articleView(selector, data) {
         $(selector).empty();
 

@@ -1,6 +1,7 @@
 var app = app || {};
 
 app.menuController = (function () {
+    "use strict";
     var _this;
 
     function MenuController(model) {
@@ -46,7 +47,7 @@ app.menuController = (function () {
             _this.search(data.tagsToSearch);
         });
 
-        this.bind('admin-event', function (e, data) {
+        this.bind('admin-event', function () {
             addAdminNav();
         });
     });

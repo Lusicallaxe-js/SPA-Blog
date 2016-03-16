@@ -1,6 +1,7 @@
 var app = app || {};
 
 app.Requester = (function () {
+    "use strict";
     var baseUrl;
     function Requester(appId, appSecret) {
         this.appId = appId;
@@ -65,7 +66,7 @@ app.Requester = (function () {
 
         $.ajax(options);
         return defer.promise;
-    };
+    }
 
     return Requester;
 }());

@@ -1,6 +1,7 @@
 var app = app || {};
 
 app.homeView = (function () {
+    "use strict";
     function homeView(selector, articlesData) {
         $(selector).empty();
 

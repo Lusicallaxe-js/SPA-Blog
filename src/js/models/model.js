@@ -1,6 +1,7 @@
 var app = app || {};
 
-app.model = function () {
+app.model = (function () {
+    "use strict";
     function Model(requester) {
         this.articleModel = app._articleModel.load(requester);
         this.userModel = app._userModel.load(requester);
@@ -12,4 +13,4 @@ app.model = function () {
             return new Model(requester);
         }
     }
-}();
+}());

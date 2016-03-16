@@ -1,6 +1,7 @@
 var app = app || {};
 
 app.userController = (function () {
+    "use strict";
     var _this;
 
     function UserController(model) {
@@ -27,8 +28,6 @@ app.userController = (function () {
                             this.trigger('admin-event');
                         });
                         window.location.replace('#/');
-                    } else {
-                        //SammyObj.redirect('#/');
                     }
                 }, function (error) {
                     poppy.pop('error', 'Wrong username or password!', '');
@@ -41,6 +40,7 @@ app.userController = (function () {
         sessionStorage.clear();
         $('#nav-login').find('> a:contains(Logout)').text('Login').attr('href', '#/login');
         $('#nav-authors').remove();
+        window.location.replace('#/');
     };
 
     Sammy(function () {

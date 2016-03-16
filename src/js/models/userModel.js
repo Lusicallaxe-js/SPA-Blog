@@ -1,6 +1,7 @@
 var app = app || {};
 
 app._userModel = (function () {
+    "use strict";
     function User(requester) {
         this._requester = requester;
     }

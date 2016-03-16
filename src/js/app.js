@@ -1,12 +1,13 @@
 var app = app || {};
 //sessionStorage['sessionAuth'] = 'c80bf3ac-ba07-4ab9-bebe-5bd2e4cfb9c4.X4pj7hnkNWh9mVpKNsMb+8COSaZs3RlscSETlZnPlh8=';
 (function () {
-    var requester = new app.Requester('kid_-ke8mBy-kZ', '1f03be196d7447e3a2a94b483c32061c');
-    var models = app.model.loadModels(requester);
-    var userController = app.userController.load(models.userModel);
-    var articleController = app.articleController.load(models.articleModel);
-    var commentController = app.commentController.load(models.commentModel);
-    var menuController = app.menuController.load(models.articleModel);
+    "use strict";
+    var requester = new app.Requester('kid_-ke8mBy-kZ', '1f03be196d7447e3a2a94b483c32061c'),
+        models = app.model.loadModels(requester),
+        userController = app.userController.load(models.userModel),
+        articleController = app.articleController.load(models.articleModel),
+        commentController = app.commentController.load(models.commentModel),
+        menuController = app.menuController.load(models.articleModel);
 
     menuController.loadMenu();
 

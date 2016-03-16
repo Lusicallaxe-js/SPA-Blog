@@ -1,11 +1,12 @@
 var app = app || {};
 
 app.menuView = (function () {
+    "use strict";
     var $searchInput = $('#search');
 
     function menuView() {
 
-        $('#search-btn').click(function (e) {
+        $('#search-btn').click(function () {
             var tagsToSearch = $searchInput.val();
             $searchInput.val('');
             if (tagsToSearch.length) {
@@ -15,7 +16,7 @@ app.menuView = (function () {
             }
         });
 
-        $('#nav-logout').click(function (e) {
+        $('#nav-logout').click(function () {
             Sammy(function () {
                 this.trigger('logout-event');
             });

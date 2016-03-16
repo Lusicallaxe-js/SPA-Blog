@@ -1,6 +1,7 @@
 var app = app || {};
 app.article = (function () {
 
+    "use strict";
     function articleCreate(article) {
         var def = Q.defer();
         var _this = {};
@@ -49,10 +50,10 @@ app.article = (function () {
 
         reader = new FileReader();
         reader.onload = readerOnLoad;
-
-        resultFile.filetype = file.type;
-        resultFile.size = file.size;
-        resultFile.filename = file.name;
+        //
+        //resultFile.filetype = file.type;
+        //resultFile.size = file.size;
+        //resultFile.filename = file.name;
         reader.readAsBinaryString(file);
 
         return defer.promise;

@@ -1,6 +1,7 @@
 var app = app || {};
 
-app.articleController = function () {
+app.articleController = (function () {
+    "use strict";
     var _this,
         currentPage,
         isOver;
@@ -45,14 +46,10 @@ app.articleController = function () {
                     articles: data,
                     isAdmin: isAdmin
                 };
-                //if (isAdmin) {
+
                 app.articleView.load(selector, articlesData);
-                //} else {
-                //    app.articleView.load(selector, articlesData);
-                //}
-            }, function (error) {
-                console.log(error);
-            })
+
+            }).done();
     };
 
     ArticleController.prototype.getAdminPage = function (selector) {
@@ -84,18 +81,18 @@ app.articleController = function () {
     Sammy(function () {
         var SammyObj;
 
-        this.bind('add-article-event', function (e, data) {
+        this.bind('add-article-event', function () {
             this.redirect('#/create-article');
         });
 
-        this.bind('next-page-event', function (e, data) {
+        this.bind('next-page-event', function () {
             if (!isOver) {
                 currentPage++;
                 _this.getArticlesPage('#articles')
             }
         });
 
-        this.bind('previous-page-event', function (e, data) {
+        this.bind('previous-page-event', function () {
             currentPage--;
             if (currentPage < 1) {
                 currentPage = 1;
@@ -109,6 +106,7 @@ app.articleController = function () {
             _this.deleteArticleById(data.id)
                 .then(function (success) {
                     $('article').hide('slow');
+                    SammyObj.trigger('delete-all-comments-event', {articleId: data.id});
                     SammyObj.redirect('#/');
                 }).done();
         });
@@ -145,4 +143,4 @@ app.articleController = function () {
             return new ArticleController(model);
         }
     }
-}();
+}());

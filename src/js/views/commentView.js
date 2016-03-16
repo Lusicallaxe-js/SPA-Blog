@@ -1,6 +1,7 @@
 var app = app || {};
 
 app.commentView = (function () {
+    "use strict";
     function commentView(selector, commentData) {
         selector.find('*').not('button').remove();
 

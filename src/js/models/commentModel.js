@@ -1,6 +1,7 @@
 var app = app || {};
 
 app._commentModel = (function () {
+    "use strict";
     var _this = this;
 
     function CommentModel(requester) {

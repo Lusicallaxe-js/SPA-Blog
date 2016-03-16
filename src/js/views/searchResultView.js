@@ -1,6 +1,7 @@
 var app = app || {};
 
 app.searchResultView = (function () {
+    "use strict";
     function searchResultView(selector, articlesData) {
         $(selector).empty();
 

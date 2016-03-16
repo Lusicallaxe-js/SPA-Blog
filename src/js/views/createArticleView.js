@@ -1,6 +1,7 @@
 var app = app || {};
 
 app.createArticleView = (function () {
+    "use strict";
     var pictureFile;
 
     function createArticleView(selector, data) {
