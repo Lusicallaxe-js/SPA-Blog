@@ -13,12 +13,13 @@ app._articleModel = (function () {
     }
 
     Article.prototype.getArticles = function (query) {
-        return this._requester.makeRequest('GET', this.collectionUrl + query, null, true);
+        return this._requester.get(this.collectionUrl + query);
+        //return this._requester.makeRequest('GET', this.collectionUrl + query, null, true);
     };
 
     Article.prototype.deleteArticleById = function (id) {
         var url = this.collectionUrl + 'articles/' + id;
-        return this._requester.makeRequest('DELETE', url, {}, true);
+        return this._requester.remove(url);
     };
 
     Article.prototype.editArticle = function (id, data) {
@@ -26,7 +27,7 @@ app._articleModel = (function () {
         var defer = Q.defer();
         app.article.get(data)
             .then(function (articleData) {
-                _this._requester.makeRequest('PUT', url, articleData, true)
+                _this._requester.put(url, articleData)
                     .then(function (data) {
                         defer.resolve(data);
                     }, function (error) {
@@ -41,7 +42,7 @@ app._articleModel = (function () {
         var defer = Q.defer();
         app.article.get(article)
             .then(function (articleData) {
-                _this._requester.makeRequest('POST', _this.collectionUrl + urlCollection, articleData, true)
+                _this._requester.post(_this.collectionUrl + urlCollection, articleData)
                     .then(function (data) {
                         defer.resolve(data);
                     }, function (error) {

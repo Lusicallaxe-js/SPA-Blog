@@ -8,7 +8,7 @@ app._userModel = (function () {
     User.prototype.login = function (data) {
         var defer = Q.defer();
         var url = 'user/' + this._requester.appId + '/login';
-        this._requester.makeRequest('POST', url, data)
+        this._requester.post(url, data)
             .then(function (success) {
                 sessionStorage['sessionAuth'] = success._kmd.authtoken;
                 sessionStorage['id'] = success._id;
@@ -21,7 +21,7 @@ app._userModel = (function () {
 
     User.prototype.logout = function () {
         var url = 'user/' + this._requester.appId + '/_logout';
-        return this._requester.makeRequest('POST', url, {}, true);
+        return this._requester.post(url, {});
     };
 
     User.prototype.isAdmin = function (id) {
@@ -29,7 +29,7 @@ app._userModel = (function () {
             id: id
         };
         var url = 'rpc/' + this._requester.appId + '/custom/isAdmin';
-        return this._requester.makeRequest('POST', url, data, true);
+        return this._requester.post(url, data);
 
     };
 

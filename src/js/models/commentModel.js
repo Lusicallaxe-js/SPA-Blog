@@ -6,16 +6,13 @@ app._commentModel = (function () {
     function CommentModel(requester) {
         this._requester = requester;
         this.collectionUrl = 'appdata/' + requester.appId + '/';
-        this._posts = {
-            posts: []
-        };
         _this = this;
     }
 
     CommentModel.prototype.getComments = function (query) {
         var defer = Q.defer();
 
-        this._requester.makeRequest('GET', this.collectionUrl + query, null, true)
+        this._requester.get(this.collectionUrl + query)
             .then(function (data) {
                 var commentsData = {
                     comments: data
@@ -29,11 +26,11 @@ app._commentModel = (function () {
     };
 
     CommentModel.prototype.addComment = function (urlCollection, comment) {
-        return this._requester.makeRequest('POST', this.collectionUrl + urlCollection, comment, true)
+        return this._requester.post(this.collectionUrl + urlCollection, comment)
     };
 
     CommentModel.prototype.deleteComment = function (urlCollectionAndId) {
-        return this._requester.makeRequest('DELETE', this.collectionUrl + urlCollectionAndId, {}, true)
+        return this._requester.remove(this.collectionUrl + urlCollectionAndId)
     };
 
     return {

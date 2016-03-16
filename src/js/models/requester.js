@@ -1,18 +1,35 @@
 var app = app || {};
 
 app.Requester = (function () {
+    var baseUrl;
     function Requester(appId, appSecret) {
         this.appId = appId;
         this.appSecret = appSecret;
-        this.baseUrl = 'https://baas.kinvey.com/';
+        baseUrl = 'https://baas.kinvey.com/';
     }
 
-    Requester.prototype.makeRequest = function (method, url, dataObj, useSession, asGuest) {
+    Requester.prototype.get = function (url) {
+        return makeRequest('GET', url, null);
+    };
+
+    Requester.prototype.post = function (url, data) {
+        return makeRequest('POST', url, data);
+    };
+
+    Requester.prototype.put = function (url, data) {
+        return makeRequest('PUT', url, data);
+    };
+
+    Requester.prototype.remove = function (url) {
+        return makeRequest('DELETE', url, {});
+    };
+
+    function makeRequest(method, url, dataObj) {
         var token,
             defer = Q.defer(),
             options = {
                 method: method,
-                url: this.baseUrl + url,
+                url: baseUrl + url,
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Basic ' + btoa('guest:1234')
