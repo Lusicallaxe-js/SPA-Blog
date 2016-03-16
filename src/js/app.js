@@ -18,6 +18,10 @@ var app = app || {};
             articleController.getArticlesPage(selector);
         });
 
+        this.get('#/latest', function () {
+            articleController.getLatestArticles(selector);
+        });
+
         this.get('#/article/:id', function () {
             var id = this.params['id'];
             userController.isAdmin()

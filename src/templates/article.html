@@ -1,8 +1,8 @@
 {{#articles}}
 <article style="width: 47%" data-id="{{_id}}">
     {{#isAdmin}}
-    <button id="delete-article">Delete article</button>
-    <button id="edit-article">Edit Article</button>
+    <button id="delete-article" class="admin-control">Delete article</button>
+    <button id="edit-article" class="admin-control">Edit Article</button>
     {{/isAdmin}}
     <h2 class="article-title">
         <a style="color: {{titleColor}}" >{{title}}</a>

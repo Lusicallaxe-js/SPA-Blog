@@ -16,7 +16,7 @@ app.article = (function () {
             _this.tags.push(e);
         });
         _this.tags = _this.tags.unique();
-        _this.rating = 0 || article.rating;
+        _this.rating = article.rating ? article.rating : 0;
         if (!article.imageSrc && !article.image) {
             def.resolve(_this);
         } else {
