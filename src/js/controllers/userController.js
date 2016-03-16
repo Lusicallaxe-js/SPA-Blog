@@ -46,15 +46,14 @@ app.userController = (function () {
     Sammy(function () {
         var SammyObj;
         this.before('#/create-article', function () {
+            if (!sessionStorage['isAdmin']) return false;
             SammyObj = this;
             _this.isAdmin()
                 .then(function (s) {
                     if (!s.role) {
                         SammyObj.redirect('#/');
                     }
-                }, function (error) {
-                    SammyObj.redirect('#/');
-                });
+                }).done();
         });
 
         this.bind('login-event', function (e, data) {

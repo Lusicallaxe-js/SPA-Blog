@@ -27,10 +27,7 @@ app.articleController = (function () {
     ArticleController.prototype.getLatestArticles = function (selector) {
         this.model.getArticles('articles?query={}&sort={"_kmd.ect":-1}')
             .then(function (data) {
-                var articlesData = {
-                    articles: data
-                };
-                app.searchResultView.load(selector, articlesData);
+                app.searchResultView.load(selector, {articles: data});
             })
     };
 
