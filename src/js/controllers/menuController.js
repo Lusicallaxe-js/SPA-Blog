@@ -17,10 +17,11 @@ app.menuController = (function () {
     };
 
     MenuController.prototype.search = function (tags) {
-        var input = encodeURIComponent(tags)
+        var input = tags
             .trim()
             .toLowerCase()
-            .split(/\s+/);
+            .split(/\s+/)
+            .map(encodeURIComponent);
 
         var query = '?query={"tags":{"$in":' + JSON.stringify(input) + '}}';
         var url = 'articles' + query;
