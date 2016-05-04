@@ -7,7 +7,7 @@
 
 		\SPA-Blog
 		
-- Install missing packages with and start 
+- Install missing packages and start with 
 
 		npm start
 		
