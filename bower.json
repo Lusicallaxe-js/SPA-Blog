@@ -1,0 +1,25 @@
+{
+  "name": "SPA-Blog",
+  "homepage": "https://github.com/Lusicallaxe-js/SPA-Blog",
+  "authors": [
+    "Ivan Kolev <ikolev94@yahoo.bg>"
+  ],
+  "description": "spa project",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "sammy": "^0.7.6",
+    "q": "~1.0.1",
+    "notie": "^3.2.0",
+    "mustache.js": "mustache#^2.2.1"
+  }
+}

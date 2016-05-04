@@ -5,7 +5,7 @@ app.homeView = (function () {
     function homeView(selector, articlesData) {
         $(selector).empty();
 
-        $.get('templates/home.html', function (template) {
+        $.get('src/templates/home.html', function (template) {
             var output = Mustache.render(template, articlesData);
             $(selector).append(output);
             $(selector).append('<div style="width: 100%;-webkit-user-select: none; " id="paging"><a id="prev">« Back</a>' +

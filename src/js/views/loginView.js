@@ -5,7 +5,7 @@ app.loginView = (function () {
     function loginView(selector) {
         $(selector).empty();
 
-        $.get('templates/login.html', function (template) {
+        $.get('src/templates/login.html', function (template) {
             var output = Mustache.render(template);
             $(selector).append(output);
 

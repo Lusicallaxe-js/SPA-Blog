@@ -9,7 +9,7 @@ app.commentView = (function () {
             commentData.isAdmin = true;
         }
 
-        $.get('templates/comment.html', function (template) {
+        $.get('src/templates/comment.html', function (template) {
             var output = Mustache.render(template, commentData);
             selector.append(output);
 

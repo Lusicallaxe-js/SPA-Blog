@@ -130,7 +130,7 @@ app.articleController = (function () {
                         console.error(error);
                     })
             } else {
-                poppy.pop('info', 'Invalid title or content', '')
+                notie.alert(3, 'Invalid title or content', 1.5);
             }
         });
     });

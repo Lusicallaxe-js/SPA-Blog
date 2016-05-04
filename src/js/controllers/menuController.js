@@ -30,7 +30,7 @@ app.menuController = (function () {
                 if (success.length) {
                     app.searchResultView.load('#articles', {articles: success});
                 } else {
-                    poppy.pop('info', 'No Results Found', '');
+                    notie.alert(4, 'No Results Found', 1.5);
                 }
             }, function (error) {
                 console.log(error);

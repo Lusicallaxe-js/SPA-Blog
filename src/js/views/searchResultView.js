@@ -5,7 +5,7 @@ app.searchResultView = (function () {
     function searchResultView(selector, articlesData) {
         $(selector).empty();
 
-        $.get('templates/home.html', function (template) {
+        $.get('src/templates/home.html', function (template) {
             var output = Mustache.render(template, articlesData);
             $(selector).append(output);
         });

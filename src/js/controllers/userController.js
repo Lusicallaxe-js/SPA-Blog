@@ -30,7 +30,7 @@ app.userController = (function () {
                         window.location.replace('#/');
                     }
                 }, function (error) {
-                    poppy.pop('error', 'Wrong username or password!', '');
+                    notie.alert(3, 'Wrong username or password!', 1.5);
                 });
         }
         return false;
@@ -65,11 +65,11 @@ app.userController = (function () {
 
     function validateUser(data) {
         if (!data.username || data.username.length < 4) {
-            poppy.pop('error', 'Invalid Username', '');
+            notie.alert(3, 'Invalid username!', 1.5);
             return false;
         }
         if (!data.password || data.password.length < 4) {
-            poppy.pop('error', 'Invalid Password', '');
+            notie.alert(3, 'Invalid password!', 1.5);
             return false;
         }
         return true;

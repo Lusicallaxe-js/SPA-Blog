@@ -66,11 +66,11 @@ app.commentController = (function () {
 
     function validateComment(comment) {
         if (!comment.author) {
-            poppy.pop('info', 'Enter your name', '');
+            notie.alert(3, 'Enter your name', 1.5);
             return false;
         }
         if (!comment.content) {
-            poppy.pop('info', 'Enter your comment', '');
+            notie.alert(3, 'Enter your comment', 1.5);
             return false;
         }
         return true;

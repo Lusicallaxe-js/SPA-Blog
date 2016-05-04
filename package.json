@@ -1,0 +1,24 @@
+{
+  "name": "spa-blog",
+  "version": "1.0.0",
+  "description": "spa-blog",
+  "devDependencies": {
+    "bower": "^1.3.1",
+    "http-server": "^0.6.1"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "http-server -a localhost -p 8000 -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lusicallaxe-js/SPA-Blog.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lusicallaxe-js/SPA-Blog/issues"
+  },
+  "homepage": "https://github.com/Lusicallaxe-js/SPA-Blog#readme"
+}

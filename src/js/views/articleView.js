@@ -5,7 +5,7 @@ app.articleView = (function () {
     function articleView(selector, data) {
         $(selector).empty();
 
-        $.get('templates/article.html', function (template) {
+        $.get('src/templates/article.html', function (template) {
             var output = Mustache.render(template, data);
             $(selector).append(output);
 
