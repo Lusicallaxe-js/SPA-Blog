@@ -27,7 +27,6 @@ app.userController = (function () {
                         Sammy(function () {
                             this.trigger('admin-event');
                         });
-                        window.location.replace('#/');
                     }
                 }, function (error) {
                     notie.alert(3, 'Wrong username or password!', 1.5);
@@ -40,7 +39,6 @@ app.userController = (function () {
         sessionStorage.clear();
         $('#nav-login').find('> a:contains(Logout)').text('Login').attr('href', '#/login');
         $('#nav-authors').remove();
-        window.location.replace('#/');
     };
 
     Sammy(function () {

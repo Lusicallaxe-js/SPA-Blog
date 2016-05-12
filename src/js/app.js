@@ -52,6 +52,7 @@ var app = app || {};
         });
         this.get('#/logout', function () {
             userController.logout();
+            this.redirect('#/');
         });
     });
     app.router.run('#/');

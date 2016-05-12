@@ -50,6 +50,7 @@ app.menuController = (function () {
 
         this.bind('admin-event', function () {
             addAdminNav();
+            this.redirect('#/');
         });
     });
 
